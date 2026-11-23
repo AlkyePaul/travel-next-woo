@@ -1,195 +1,229 @@
 "use client";
 
+// Cart state backed by the WooCommerce Store API (through /api/cart).
+//
+// WooCommerce owns the cart: prices, stock, "sold individually", coupons and
+// plugin rules are applied server-side, and this context only mirrors the
+// result. The public API is unchanged from the old localStorage cart, so pages
+// and components keep working as before.
+
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
-  useCallback,
-  ReactNode,
+  type ReactNode,
 } from "react";
+import { useLocale } from "next-intl";
 
-import type { CartItem, Cart, CartTotals, ProductDefaultAttribute } from "@/lib/woocommerce.d";
+import type { Cart, CartItem, TourBookingRequest } from "@/lib/woocommerce.d";
 
-const CART_STORAGE_KEY = "woo-cart";
+/** Key used by the previous client-only cart; migrated once into WooCommerce. */
+const LEGACY_STORAGE_KEY = "woo-cart";
+
+const EMPTY_CART: Cart = {
+  items: [],
+  totals: { subtotal: "0.00", shipping: "0.00", tax: "0.00", total: "0.00", itemCount: 0 },
+};
+
+type CartAction =
+  | { action: "add-item"; id: number; quantity: number }
+  | { action: "add-booking"; booking: TourBookingRequest }
+  | { action: "update-item"; key: string; quantity: number }
+  | { action: "remove-item"; key: string }
+  | { action: "apply-coupon"; code: string }
+  | { action: "remove-coupon"; code: string }
+  | { action: "clear" };
 
 interface CartContextType {
   cart: Cart;
   isOpen: boolean;
+  /** First load of the cart */
   isLoading: boolean;
+  /** A cart change is being sent to WooCommerce */
+  isUpdating: boolean;
+  /** Last error returned by WooCommerce (already in the shop's language) */
+  error: string | null;
+  clearError: () => void;
   openCart: () => void;
   closeCart: () => void;
   toggleCart: () => void;
-  addItem: (item: CartItem) => Promise<void>;
-  removeItem: (productId: number, variationId?: number) => void;
-  updateQuantity: (productId: number, quantity: number, variationId?: number) => void;
-  clearCart: () => void;
+  /** Resolves to false when WooCommerce refused the item (see `error`) */
+  addItem: (item: CartItem) => Promise<boolean>;
+  /** Add a tour booking; WordPress validates and prices it (false + `error` if refused) */
+  addBooking: (booking: TourBookingRequest) => Promise<boolean>;
+  removeItem: (productId: number, variationId?: number) => Promise<boolean>;
+  /** Remove one cart line (needed for tours: several bookings can share a product) */
+  removeLine: (key: string) => Promise<boolean>;
+  updateQuantity: (productId: number, quantity: number, variationId?: number) => Promise<boolean>;
+  applyCoupon: (code: string) => Promise<boolean>;
+  removeCoupon: (code: string) => Promise<boolean>;
+  clearCart: () => Promise<boolean>;
+  refresh: () => Promise<void>;
   getItemCount: () => number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-function calculateTotals(items: CartItem[]): CartTotals {
-  const subtotal = items.reduce((sum, item) => {
-    return sum + parseFloat(item.price) * item.quantity;
-  }, 0);
+type CartResponse = { cart?: Cart; error?: { message: string; code?: string } };
 
-  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
-
-  // Tax and shipping would typically be calculated server-side
-  // For now we return placeholders
-  return {
-    subtotal: subtotal.toFixed(2),
-    shipping: "0.00",
-    tax: "0.00",
-    total: subtotal.toFixed(2),
-    itemCount,
-  };
-}
-
-function getCartKey(productId: number, variationId?: number): string {
-  return variationId ? `${productId}-${variationId}` : `${productId}`;
-}
-
-interface CartProviderProps {
-  children: ReactNode;
-}
-
-export function CartProvider({ children }: CartProviderProps) {
-  const [cart, setCart] = useState<Cart>({
-    items: [],
-    totals: calculateTotals([]),
-  });
+export function CartProvider({ children }: { children: ReactNode }) {
+  const locale = useLocale();
+  const [cart, setCart] = useState<Cart>(EMPTY_CART);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [pending, setPending] = useState(0);
+  const [error, setError] = useState<string | null>(null);
 
-  // Load cart from localStorage on mount
+  // Cart changes run one at a time, in order, so responses can't overwrite each other
+  const queue = useRef<Promise<unknown>>(Promise.resolve());
+  const cartRef = useRef(cart);
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(CART_STORAGE_KEY);
-      if (stored) {
-        const items: CartItem[] = JSON.parse(stored);
-        // eslint-disable-next-line react-hooks/set-state-in-effect -- Restore browser storage after hydration.
-        setCart({
-          items,
-          totals: calculateTotals(items),
-        });
-      }
-    } catch (error) {
-      console.error("Failed to load cart from storage:", error);
-    } finally {
-      setIsLoading(false);
-    }
+    cartRef.current = cart;
+  }, [cart]);
+
+  const enqueue = useCallback(<T,>(task: () => Promise<T>): Promise<T> => {
+    const run = queue.current.then(task, task);
+    queue.current = run.catch(() => undefined);
+    return run;
   }, []);
 
-  // Save cart to localStorage whenever it changes
-  useEffect(() => {
-    if (!isLoading) {
-      try {
-        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart.items));
-      } catch (error) {
-        console.error("Failed to save cart to storage:", error);
-      }
-    }
-  }, [cart.items, isLoading]);
-
-  const openCart = useCallback(() => setIsOpen(true), []);
-  const closeCart = useCallback(() => setIsOpen(false), []);
-  const toggleCart = useCallback(() => setIsOpen((prev) => !prev), []);
-
-  const addItem = useCallback(async (newItem: CartItem) => {
-    setCart((prev) => {
-      const existingIndex = prev.items.findIndex(
-        (item) =>
-          item.productId === newItem.productId &&
-          item.variationId === newItem.variationId
-      );
-
-      let newItems: CartItem[];
-
-      if (existingIndex >= 0) {
-        // Update quantity if item already exists
-        newItems = prev.items.map((item, index) => {
-          if (index === existingIndex) {
-            return {
-              ...item,
-              quantity: item.quantity + newItem.quantity,
-            };
+  const send = useCallback(
+    (action: CartAction): Promise<boolean> =>
+      enqueue(async () => {
+        setPending((n) => n + 1);
+        try {
+          const response = await fetch("/api/cart", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...action, locale }),
+          });
+          const json: CartResponse = await response.json().catch(() => ({}));
+          if (!response.ok || !json.cart) {
+            setError(json.error?.message ?? "Cart error");
+            return false;
           }
-          return item;
-        });
-      } else {
-        // Add new item
-        newItems = [...prev.items, newItem];
+          setCart(json.cart);
+          setError(null);
+          return true;
+        } catch {
+          setError("Cart unavailable");
+          return false;
+        } finally {
+          setPending((n) => n - 1);
+        }
+      }),
+    [enqueue, locale]
+  );
+
+  const refresh = useCallback(
+    () =>
+      enqueue(async () => {
+        try {
+          const response = await fetch(`/api/cart?locale=${encodeURIComponent(locale)}`, {
+            cache: "no-store",
+          });
+          const json: CartResponse = await response.json().catch(() => ({}));
+          if (json.cart) setCart(json.cart);
+        } catch {
+          // Keep the last known cart
+        }
+      }),
+    [enqueue, locale]
+  );
+
+  // Load the cart (and reload it when the language changes, for translated names)
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      await refresh();
+      if (cancelled) return;
+
+      // One-time migration of the old browser-only cart
+      try {
+        const legacy = localStorage.getItem(LEGACY_STORAGE_KEY);
+        if (legacy) {
+          localStorage.removeItem(LEGACY_STORAGE_KEY);
+          const items: CartItem[] = JSON.parse(legacy);
+          if (cartRef.current.items.length === 0) {
+            for (const item of items) {
+              await send({
+                action: "add-item",
+                id: item.variationId ?? item.productId,
+                quantity: Math.max(1, item.quantity),
+              });
+            }
+          }
+        }
+      } catch {
+        // Unreadable legacy data: ignore it
       }
+      if (!cancelled) setIsLoading(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [refresh, send]);
 
-      return {
-        items: newItems,
-        totals: calculateTotals(newItems),
-      };
-    });
+  const findKey = (productId: number, variationId?: number) =>
+    cartRef.current.items.find(
+      (item) =>
+        (variationId ? item.variationId === variationId : item.productId === productId) &&
+        item.key
+    )?.key;
 
-    // Open cart drawer after adding
-    setIsOpen(true);
-  }, []);
+  const addItem = useCallback(
+    async (item: CartItem) => {
+      const ok = await send({
+        action: "add-item",
+        id: item.variationId ?? item.productId,
+        quantity: item.soldIndividually ? 1 : Math.max(1, item.quantity),
+      });
+      if (ok) setIsOpen(true);
+      return ok;
+    },
+    [send]
+  );
+
+  const addBooking = useCallback(
+    async (booking: TourBookingRequest) => {
+      const ok = await send({ action: "add-booking", booking });
+      if (ok) setIsOpen(true);
+      return ok;
+    },
+    [send]
+  );
+
+  const removeLine = useCallback((key: string) => send({ action: "remove-item", key }), [send]);
 
   const removeItem = useCallback(
-    (productId: number, variationId?: number) => {
-      setCart((prev) => {
-        const newItems = prev.items.filter(
-          (item) =>
-            !(
-              item.productId === productId &&
-              item.variationId === variationId
-            )
-        );
-
-        return {
-          items: newItems,
-          totals: calculateTotals(newItems),
-        };
-      });
+    async (productId: number, variationId?: number) => {
+      const key = findKey(productId, variationId);
+      return key ? send({ action: "remove-item", key }) : false;
     },
-    []
+    [send]
   );
 
   const updateQuantity = useCallback(
-    (productId: number, quantity: number, variationId?: number) => {
-      if (quantity <= 0) {
-        removeItem(productId, variationId);
-        return;
-      }
-
-      setCart((prev) => {
-        const newItems = prev.items.map((item) => {
-          if (
-            item.productId === productId &&
-            item.variationId === variationId
-          ) {
-            return { ...item, quantity };
-          }
-          return item;
-        });
-
-        return {
-          items: newItems,
-          totals: calculateTotals(newItems),
-        };
-      });
+    async (productId: number, quantity: number, variationId?: number) => {
+      const key = findKey(productId, variationId);
+      if (!key) return false;
+      return send({ action: "update-item", key, quantity: Math.max(0, quantity) });
     },
-    [removeItem]
+    [send]
   );
 
-  const clearCart = useCallback(() => {
-    setCart({
-      items: [],
-      totals: calculateTotals([]),
-    });
-  }, []);
+  const applyCoupon = useCallback((code: string) => send({ action: "apply-coupon", code }), [send]);
+  const removeCoupon = useCallback((code: string) => send({ action: "remove-coupon", code }), [send]);
+  const clearCart = useCallback(() => send({ action: "clear" }), [send]);
 
-  const getItemCount = useCallback(() => {
-    return cart.totals.itemCount;
-  }, [cart.totals.itemCount]);
+  const clearError = useCallback(() => setError(null), []);
+  const openCart = useCallback(() => setIsOpen(true), []);
+  const closeCart = useCallback(() => setIsOpen(false), []);
+  const toggleCart = useCallback(() => setIsOpen((prev) => !prev), []);
+  const getItemCount = useCallback(() => cart.totals.itemCount, [cart.totals.itemCount]);
 
   return (
     <CartContext.Provider
@@ -197,13 +231,21 @@ export function CartProvider({ children }: CartProviderProps) {
         cart,
         isOpen,
         isLoading,
+        isUpdating: pending > 0,
+        error,
+        clearError,
         openCart,
         closeCart,
         toggleCart,
         addItem,
+        addBooking,
         removeItem,
+        removeLine,
         updateQuantity,
+        applyCoupon,
+        removeCoupon,
         clearCart,
+        refresh,
         getItemCount,
       }}
     >

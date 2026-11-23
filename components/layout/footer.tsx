@@ -1,62 +1,66 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Section, Container } from "@/components/craft";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
-import { mainMenu, contentMenu } from "@/menu.config";
+import { Wordmark } from "@/components/layout/wordmark";
+import { experienceCategories, mainMenu, menuEntries } from "@/menu.config";
 import { siteConfig } from "@/site.config";
-import Logo from "@/public/logo.svg";
+
+const linkClass =
+  "text-secondary-foreground/80 hover:text-secondary-foreground hover:underline underline-offset-4";
 
 export function Footer() {
+  const t = useTranslations("Nav");
+  const tFooter = useTranslations("Footer");
+  const tExp = useTranslations("Experiences");
+  const tMeta = useTranslations("Metadata");
+
   return (
-    <footer>
-      <Section>
-        <Container className="grid md:grid-cols-[1.5fr_0.5fr_0.5fr] gap-12">
-          <div className="flex flex-col gap-6 not-prose">
-            <Link href="/">
-              <h3 className="sr-only">{siteConfig.site_name}</h3>
-              <Image
-                src={Logo}
-                alt="Logo"
-                className="dark:invert"
-                width={42}
-                height={26.44}
-              />
+    <footer className="bg-secondary text-secondary-foreground">
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 pt-14 pb-10 grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
+        <div className="flex flex-col gap-4 max-w-sm">
+          <Link href="/" className="self-start">
+            <Wordmark
+              className="text-2xl"
+              ampersandClassName="text-primary-soft"
+            />
+          </Link>
+          <p className="text-sm text-secondary-foreground/75">{tMeta("description")}</p>
+        </div>
+
+        <div className="flex flex-col gap-2 text-sm">
+          <h2 className="font-sans text-base font-semibold tracking-normal mb-1">
+            {tFooter("experiences")}
+          </h2>
+          {menuEntries(experienceCategories).map(([key, slug]) => (
+            <Link key={slug} className={linkClass} href={`/shop/category/${slug}`}>
+              {tExp(`${key}.title`)}
             </Link>
-            <p>{siteConfig.site_description}</p>
-          </div>
-          <div className="flex flex-col gap-2 text-sm">
-            <h5 className="font-medium text-base">Website</h5>
-            {Object.entries(mainMenu).map(([key, href]) => (
-              <Link
-                className="hover:underline underline-offset-4"
-                key={href}
-                href={href}
-              >
-                {key.charAt(0).toUpperCase() + key.slice(1)}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-col gap-2 text-sm">
-            <h5 className="font-medium text-base">Blog</h5>
-            {Object.entries(contentMenu).map(([key, href]) => (
-              <Link
-                className="hover:underline underline-offset-4"
-                key={href}
-                href={href}
-              >
-                {key.charAt(0).toUpperCase() + key.slice(1)}
-              </Link>
-            ))}
-          </div>
-        </Container>
-        <Container className="border-t not-prose flex flex-col md:flex-row md:gap-2 gap-6 justify-between md:items-center">
-          <ThemeToggle />
-          <p className="text-muted-foreground">
-            &copy; <a href="https://9d8.dev">9d8</a>. All rights reserved.
-            2025-present.
+          ))}
+        </div>
+
+        <div className="flex flex-col gap-2 text-sm">
+          <h2 className="font-sans text-base font-semibold tracking-normal mb-1">
+            {t("website")}
+          </h2>
+          {menuEntries(mainMenu).map(([key, href]) => (
+            <Link className={linkClass} key={href} href={href}>
+              {t(key)}
+            </Link>
+          ))}
+          <Link className={linkClass} href="/cart">
+            {t("cart")}
+          </Link>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-8">
+        <div className="flex flex-col-reverse gap-4 border-t border-secondary-foreground/15 py-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-secondary-foreground/70">
+            &copy; {siteConfig.site_name}. {tFooter("rights")}
           </p>
-        </Container>
-      </Section>
+          <ThemeToggle className="self-start border-secondary-foreground/25 bg-transparent text-secondary-foreground hover:bg-secondary-foreground/10 hover:text-secondary-foreground" />
+        </div>
+      </div>
     </footer>
   );
 }

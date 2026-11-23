@@ -1,3 +1,5 @@
+import type { ContentTranslations } from "./woocommerce.d";
+
 // Common types that are reused across multiple entities
 interface WPEntity {
   id: number;
@@ -77,6 +79,8 @@ export interface Post extends WPEntity {
   tags: number[];
   meta: Record<string, unknown>;
   _embedded?: PostEmbedded;
+  /** Translations from the Next i18n WordPress plugin, keyed by locale (absent if the plugin is off) */
+  i18n?: ContentTranslations;
 }
 
 export interface Page extends WPEntity {
@@ -91,6 +95,8 @@ export interface Page extends WPEntity {
   ping_status: "open" | "closed";
   template: string;
   meta: Record<string, unknown>;
+  /** Translations from the Next i18n WordPress plugin, keyed by locale (absent if the plugin is off) */
+  i18n?: ContentTranslations;
 }
 
 // Taxonomy types

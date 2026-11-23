@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ShoppingCart, Plus, Minus, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import type { Product, ProductVariation } from "@/lib/woocommerce.d";
 import { isProductInStock } from "@/lib/woocommerce";
@@ -22,9 +23,12 @@ export function AddToCartButton({
   className,
   showQuantity = true,
 }: AddToCartButtonProps) {
-  const { addItem } = useCart();
+  const { addItem, error: cartError } = useCart();
+  const t = useTranslations("Product");
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
+  // WooCommerce refused the last add (stock, limits, ...): show its message
+  const [addFailed, setAddFailed] = useState(false);
 
   // For variable products, require a variation
   const isVariable = product.type === "variable";
@@ -36,26 +40,34 @@ export function AddToCartButton({
     checkableItem.stock_status === "instock" ||
     checkableItem.stock_status === "onbackorder";
 
-  const maxQuantity = checkableItem.stock_quantity || 99;
+  // WooCommerce "Sold individually": one per order, so no quantity selector
+  const soldIndividually = product.sold_individually;
+  const maxQuantity = soldIndividually ? 1 : checkableItem.stock_quantity || 99;
 
   const handleAddToCart = async () => {
     if (needsVariation || !inStock) return;
 
     setIsAdding(true);
+    setAddFailed(false);
 
     try {
-      await addItem({
+      const added = await addItem({
         productId: product.id,
         variationId: variation?.id,
-        quantity,
+        quantity: soldIndividually ? 1 : quantity,
+        soldIndividually,
         name: product.name + (variation ? ` - ${variation.attributes.map((a) => a.option).join(", ")}` : ""),
         price: variation?.price || product.price,
         image: (variation?.image || product.images[0])?.src,
         attributes: variation?.attributes,
       });
 
-      // Reset quantity after adding
-      setQuantity(1);
+      if (added) {
+        // Reset quantity after adding
+        setQuantity(1);
+      } else {
+        setAddFailed(true);
+      }
     } finally {
       setIsAdding(false);
     }
@@ -76,7 +88,7 @@ export function AddToCartButton({
   if (!inStock) {
     return (
       <Button disabled className={cn("w-full", className)}>
-        Out of Stock
+        {t("outOfStock")}
       </Button>
     );
   }
@@ -84,9 +96,9 @@ export function AddToCartButton({
   return (
     <div className={cn("flex flex-col gap-3", className)}>
       {/* Quantity Selector */}
-      {showQuantity && (
+      {showQuantity && !soldIndividually && (
         <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">Quantity:</span>
+          <span className="text-sm text-muted-foreground">{t("quantity")}</span>
           <div className="flex items-center border rounded-md">
             <Button
               type="button"
@@ -123,17 +135,23 @@ export function AddToCartButton({
         {isAdding ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Adding...
+            {t("adding")}
           </>
         ) : needsVariation ? (
-          "Select options"
+          t("selectOptions")
         ) : (
           <>
             <ShoppingCart className="mr-2 h-4 w-4" />
-            Add to Cart
+            {t("addToCart")}
           </>
         )}
       </Button>
+
+      {addFailed && cartError && (
+        <p role="alert" className="text-sm text-destructive">
+          {cartError}
+        </p>
+      )}
     </div>
   );
 }

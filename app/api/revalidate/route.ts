@@ -96,6 +96,9 @@ export async function POST(request: NextRequest) {
         if (contentId) {
           revalidateTag(`order-${contentId}`, { expire: 0 });
         }
+      } else if (contentType === "next_faq" || contentType === "next_faq_list") {
+        // FAQs from the Next FAQ plugin (home + product page lists)
+        revalidateTag("faqs", { expire: 0 });
       } else if (contentType === "stock_update") {
         // Product stock was updated - revalidate product pages
         revalidateTag("woocommerce", { expire: 0 });

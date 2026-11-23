@@ -1,5 +1,6 @@
 import type { Product } from "@/lib/woocommerce.d";
-import { isProductInStock, getProductStockMessage } from "@/lib/woocommerce";
+import { useTranslations } from "next-intl";
+import { isProductInStock, getProductStockStatus } from "@/lib/woocommerce";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -14,8 +15,13 @@ export function StockBadge({
   showQuantity = false,
   className,
 }: StockBadgeProps) {
+  const t = useTranslations("Product.stock");
   const inStock = isProductInStock(product);
-  const message = getProductStockMessage(product);
+  const stock = getProductStockStatus(product);
+  const message =
+    stock.status === "lowStock"
+      ? t("lowStock", { count: stock.quantity })
+      : t(stock.status);
 
   const isLowStock =
     product.manage_stock &&
@@ -30,26 +36,24 @@ export function StockBadge({
       {inStock ? (
         <Badge
           variant={isLowStock ? "outline" : "secondary"}
-          className={cn(
-            isLowStock && "border-yellow-500 text-yellow-600 bg-yellow-50"
-          )}
+          className={cn(isLowStock && "border-accent/50 text-accent")}
         >
           <span
             className={cn(
               "w-2 h-2 rounded-full mr-2",
-              isLowStock ? "bg-yellow-500" : "bg-green-500"
+              isLowStock ? "bg-accent" : "bg-secondary-foreground"
             )}
           />
           {message}
         </Badge>
       ) : isBackorder ? (
-        <Badge variant="outline" className="border-blue-500 text-blue-600 bg-blue-50">
-          <span className="w-2 h-2 rounded-full bg-blue-500 mr-2" />
+        <Badge variant="outline">
+          <span className="w-2 h-2 rounded-full bg-muted-foreground mr-2" />
           {message}
         </Badge>
       ) : (
         <Badge variant="destructive">
-          <span className="w-2 h-2 rounded-full bg-red-300 mr-2" />
+          <span className="w-2 h-2 rounded-full bg-destructive-foreground/70 mr-2" />
           {message}
         </Badge>
       )}

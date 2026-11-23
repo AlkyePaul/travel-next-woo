@@ -1,0 +1,23 @@
+/* Translations box */
+.next-i18n-note { color: #50575e; margin-top: 0; }
+.next-i18n-locale { border: 1px solid #dcdcde; border-radius: 4px; padding: 0 12px; margin: 0 0 10px; background: #fff; }
+.next-i18n-locale > summary { cursor: pointer; padding: 10px 0; display: flex; gap: 10px; align-items: center; }
+.next-i18n-locale[open] > summary { border-bottom: 1px solid #f0f0f1; margin-bottom: 8px; }
+.next-i18n-locale label { font-weight: 600; display: inline-block; margin-bottom: 4px; }
+.next-i18n-locale input[type="checkbox"] + * { font-weight: normal; }
+.next-i18n-actions { display: flex; gap: 10px; align-items: center; margin: 8px 0; }
+.next-i18n-status { color: #50575e; }
+.next-i18n-status.is-error { color: #b32d2e; }
+
+.next-i18n-badge { font-size: 11px; line-height: 1; padding: 4px 8px; border-radius: 999px; background: #f0f0f1; color: #50575e; }
+.next-i18n-badge.is-missing { background: #fcf0f1; color: #8a2424; }
+.next-i18n-badge.is-stale { background: #fcf9e8; color: #6e4f00; }
+.next-i18n-badge.is-auto { background: #f0f6fc; color: #0a4b78; }
+.next-i18n-badge.is-reviewed,
+.next-i18n-badge.is-manual { background: #edfaef; color: #005c12; }
+
+/* Settings page */
+.next-i18n-settings .next-i18n-languages { max-width: 860px; }
+.next-i18n-settings .next-i18n-languages td { vertical-align: middle; }
+.next-i18n-settings .next-i18n-languages .small-text { width: 5em; }
+.next-i18n-settings .next-i18n-usage { width: 25em; max-width: 100%; }

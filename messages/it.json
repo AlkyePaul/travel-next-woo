@@ -1,0 +1,392 @@
+{
+  "Metadata": {
+    "description": "Degustazioni in cantina, tour tra i vigneti e viaggi del vino in Italia. Scegli la data e prenota online."
+  },
+  "Nav": {
+    "home": "Home",
+    "shop": "Esperienze",
+    "blog": "Blog",
+    "categories": "Categorie",
+    "tags": "Tag",
+    "authors": "Autori",
+    "menu": "Menu",
+    "blogMenu": "Menu blog",
+    "toggleMenu": "Apri il menu",
+    "website": "Il sito",
+    "cart": "Carrello"
+  },
+  "LocaleSwitcher": {
+    "label": "Lingua",
+    "locale": "{locale, select, it {Italiano} es {Español} en {English} other {{locale}}}"
+  },
+  "Footer": {
+    "rights": "Tutti i diritti riservati.",
+    "experiences": "Esperienze"
+  },
+  "NotFound": {
+    "title": "Pagina non trovata",
+    "description": "L’indirizzo potrebbe essere cambiato o non esistere più. Riparti dalla home o sfoglia le esperienze.",
+    "backHome": "Torna alla home",
+    "browse": "Sfoglia le esperienze"
+  },
+  "Common": {
+    "loading": "Caricamento...",
+    "noImageAvailable": "Nessuna immagine disponibile",
+    "continueShopping": "Scopri le esperienze",
+    "goBack": "Torna indietro",
+    "toggleTheme": "Cambia tema",
+    "close": "Chiudi",
+    "subtotal": "Subtotale",
+    "shipping": "Spedizione",
+    "tax": "IVA",
+    "total": "Totale",
+    "previous": "Precedente",
+    "next": "Successiva",
+    "previousPage": "Vai alla pagina precedente",
+    "nextPage": "Vai alla pagina successiva"
+  },
+  "Home": {
+    "hero": {
+      "title": "Il vino si capisce dove nasce",
+      "intro": "Degustazioni in cantina, giornate tra i filari e viaggi di più giorni nelle terre del vino italiano. Scegli la data e prenota online.",
+      "regions": "Langhe, Valpolicella, Chianti Classico, colline del Prosecco, Franciacorta ed Etna",
+      "cta": "Scopri le esperienze"
+    },
+    "durations": {
+      "title": "Quanto tempo hai?",
+      "intro": "Dalla degustazione di un pomeriggio al viaggio di una settimana: scegli in base al tempo che vuoi dedicare al vino."
+    },
+    "featured": {
+      "title": "Esperienze da prenotare",
+      "all": "Tutte le esperienze"
+    },
+    "booking": {
+      "title": "Come si prenota",
+      "steps": {
+        "choose": {
+          "title": "Scegli data e partecipanti",
+          "description": "Ogni esperienza mostra le date disponibili e calcola il prezzo per il tuo gruppo prima che tu prenoti."
+        },
+        "confirm": {
+          "title": "Conferma immediata o su richiesta",
+          "description": "Molte esperienze si confermano subito. Per le altre verifichiamo noi la disponibilità con la cantina e ti rispondiamo via email."
+        },
+        "pay": {
+          "title": "Paghi online",
+          "description": "Con la conferma immediata paghi al momento. Per le richieste non paghi nulla finché non confermiamo: ti mandiamo noi il link di pagamento."
+        }
+      }
+    },
+    "map": {
+      "title": "Le terre del vino nel mondo",
+      "intro": "Scegli un paese: il numero indica le esperienze in programma. Le altre grandi terre del vino sono già sulla mappa, in attesa dei prossimi viaggi."
+    }
+  },
+  "Experiences": {
+    "hours": {
+      "duration": "Qualche ora",
+      "title": "Esperienze in cantina",
+      "description": "Degustazioni guidate, masterclass e vendemmie in famiglia, con chi il vino lo fa ogni giorno.",
+      "link": "Vedi le esperienze in cantina"
+    },
+    "day": {
+      "duration": "Una giornata",
+      "title": "Tour tra i vigneti",
+      "description": "In e-bike, in Vespa o con autista privato: più cantine in un giorno, con pranzo e degustazioni lungo la strada.",
+      "link": "Vedi i tour tra i vigneti"
+    },
+    "days": {
+      "duration": "Più giorni",
+      "title": "Viaggi del vino",
+      "description": "Weekend e itinerari con pernottamento tra le vigne, in piccoli gruppi a date fisse o costruiti su misura.",
+      "link": "Vedi i viaggi del vino"
+    }
+  },
+  "Cart": {
+    "title": "Carrello",
+    "loading": "Caricamento carrello...",
+    "empty": "Il tuo carrello è vuoto",
+    "emptyDescription": "Non hai ancora aggiunto nessuna esperienza. Scegli una data e prenota in pochi passaggi.",
+    "clear": "Svuota carrello",
+    "remove": "Rimuovi",
+    "orderSummary": "Riepilogo ordine",
+    "subtotalItems": "Subtotale ({count, plural, one {# articolo} other {# articoli}})",
+    "proceedToCheckout": "Procedi al checkout",
+    "viewCart": "Vai al carrello",
+    "open": "Apri carrello",
+    "drawerTitle": "Il tuo carrello ({count})"
+  },
+  "Checkout": {
+    "title": "Checkout",
+    "emptyDescription": "Aggiungi un’esperienza al carrello per procedere con la prenotazione.",
+    "billingDetails": "Dati di fatturazione",
+    "firstName": "Nome *",
+    "lastName": "Cognome *",
+    "company": "Azienda (facoltativo)",
+    "email": "Email *",
+    "phone": "Telefono *",
+    "address": "Indirizzo *",
+    "addressPlaceholder": "Via e numero civico",
+    "address2Placeholder": "Appartamento, scala, interno, ecc. (facoltativo)",
+    "city": "Città *",
+    "state": "Provincia *",
+    "postcode": "CAP *",
+    "country": "Paese *",
+    "orderNotes": "Note sull’ordine (facoltativo)",
+    "notesPlaceholder": "Note sul tuo ordine, ad es. indicazioni per la consegna",
+    "yourOrder": "Il tuo ordine",
+    "quantity": "Qtà: {quantity}",
+    "shippingNextStep": "Calcolata al passaggio successivo",
+    "processing": "Elaborazione...",
+    "proceedToPayment": "Procedi al pagamento",
+    "terms": "Effettuando l’ordine accetti i nostri Termini di servizio e l’Informativa sulla privacy.",
+    "errors": {
+      "emailRequired": "L’email è obbligatoria.",
+      "cartEmpty": "Il tuo carrello è vuoto.",
+      "orderFailed": "Impossibile creare l’ordine. Riprova.",
+      "generic": "Si è verificato un errore. Riprova.",
+      "bookingUnavailable": "Una prenotazione non è più disponibile. Aggiorna il carrello e riprova."
+    },
+    "sendRequest": "Invia richiesta di prenotazione",
+    "requestNote": "Una o più prenotazioni richiedono la nostra conferma: ora non paghi nulla. Riceverai un’email con il link di pagamento appena confermiamo."
+  },
+  "CheckoutSuccess": {
+    "title": "Grazie per la tua prenotazione",
+    "description": "Abbiamo ricevuto il tuo ordine: a breve riceverai un’email di conferma con tutti i dettagli.",
+    "orderNumber": "Numero ordine",
+    "viewOrder": "Visualizza ordine",
+    "loading": "Caricamento dettagli ordine...",
+    "requestTitle": "Richiesta inviata",
+    "requestDescription": "Abbiamo ricevuto la tua richiesta di prenotazione. Verifichiamo la disponibilità e ti rispondiamo al più presto: se confermata, riceverai un’email con il link per il pagamento.",
+    "requestNumber": "Numero richiesta"
+  },
+  "Shop": {
+    "title": "Esperienze",
+    "metaDescription": "Degustazioni in cantina, tour tra i vigneti e viaggi del vino in Italia: scegli l’esperienza e prenota online.",
+    "productsFound": "{count, plural, =0 {Nessuna esperienza} one {# esperienza} other {# esperienze}}",
+    "matching": "per “{search}”",
+    "productCount": "{count, plural, =0 {Nessuna esperienza} one {# esperienza} other {# esperienze}}",
+    "categoryNotFound": "Categoria non trovata",
+    "categoryDescription": "Esperienze: {name}",
+    "intro": "Degustazioni, giornate tra i vigneti e viaggi di più giorni. Filtra per tipo di esperienza o cerca una zona del vino.",
+    "empty": "Nessuna esperienza corrisponde alla ricerca. Prova a togliere qualche filtro."
+  },
+  "Filters": {
+    "search": "Cerca",
+    "searchPlaceholder": "Cerca per nome, zona o vino…",
+    "category": "Categoria",
+    "allCategories": "Tutte le categorie",
+    "tag": "Tag",
+    "allTags": "Tutti i tag",
+    "sortBy": "Ordina per",
+    "sort": {
+      "default": "Consigliati",
+      "popularity": "Più prenotate",
+      "rating": "Più apprezzate",
+      "date": "Novità",
+      "price": "Prezzo crescente",
+      "priceDesc": "Prezzo decrescente"
+    },
+    "priceRange": "Fascia di prezzo",
+    "min": "Min",
+    "max": "Max",
+    "clear": "Azzera filtri",
+    "open": "Filtri",
+    "showResults": "Mostra risultati"
+  },
+  "Product": {
+    "notFound": "Esperienza non trovata",
+    "reviewCount": "({count, plural, one {# recensione} other {# recensioni}})",
+    "sku": "SKU:",
+    "tags": "Tag:",
+    "description": "Descrizione",
+    "reviews": "Recensioni ({count})",
+    "verified": "Verificato",
+    "related": "Ti potrebbero interessare",
+    "featured": "In evidenza",
+    "priceOnRequest": "Prezzo su richiesta",
+    "save": "Risparmi il {percent}%",
+    "thumbnailAlt": "{name} – immagine {index}",
+    "quantity": "Quantità:",
+    "addToCart": "Aggiungi al carrello",
+    "adding": "Aggiunta in corso...",
+    "selectOptions": "Seleziona le opzioni",
+    "outOfStock": "Esaurito",
+    "stock": {
+      "inStock": "Disponibile",
+      "outOfStock": "Esaurito",
+      "backorder": "Disponibile su ordinazione",
+      "lowStock": "{count, plural, one {Solo # rimasto} other {Solo # rimasti}} in magazzino"
+    }
+  },
+  "Posts": {
+    "title": "Blog",
+    "metaTitle": "Articoli del blog",
+    "metaDescription": "Racconti di cantine, vitigni e territori del vino italiano.",
+    "found": "{count, plural, one {# articolo trovato} other {# articoli trovati}}",
+    "matchingSearch": "per la tua ricerca",
+    "noPosts": "Nessun articolo trovato",
+    "searchPlaceholder": "Cerca articoli...",
+    "allTags": "Tutti i tag",
+    "noTags": "Nessun tag trovato",
+    "allCategories": "Tutte le categorie",
+    "noCategories": "Nessuna categoria trovata",
+    "allAuthors": "Tutti gli autori",
+    "noAuthors": "Nessun autore trovato",
+    "resetFilters": "Azzera filtri",
+    "published": "Pubblicato il {date}",
+    "byAuthor": "da <link>{author}</link>",
+    "noExcerpt": "Nessun estratto disponibile",
+    "untitled": "Articolo senza titolo",
+    "uncategorized": "Senza categoria",
+    "thumbnailAlt": "Miniatura dell’articolo",
+    "authors": {
+      "title": "Tutti gli autori",
+      "description": "Sfoglia tutti gli autori degli articoli del blog",
+      "empty": "Ancora nessun autore disponibile."
+    },
+    "categories": {
+      "title": "Tutte le categorie",
+      "description": "Sfoglia tutte le categorie degli articoli del blog",
+      "empty": "Ancora nessuna categoria disponibile."
+    },
+    "tags": {
+      "title": "Tutti i tag",
+      "description": "Sfoglia tutti i tag degli articoli del blog",
+      "empty": "Ancora nessun tag disponibile."
+    },
+    "readingTime": "{minutes} min di lettura",
+    "featured": "In evidenza",
+    "related": "Altri articoli",
+    "backToBlog": "Torna al blog"
+  },
+  "Pages": {
+    "title": "Tutte le pagine",
+    "description": "Sfoglia tutte le pagine",
+    "empty": "Ancora nessuna pagina disponibile."
+  },
+  "Tour": {
+    "kind": "{kind, select, experience {Esperienza} day_tour {Tour giornaliero} multi_day {Pacchetto multi-giorno} other {Tour}}",
+    "duration": "{unit, select, minutes {{value, number} min} hours {{value, plural, one {# ora} other {# ore}}} days {{value, plural, one {# giorno} other {# giorni}}} other {{value, number}}}",
+    "nights": "{count, plural, one {# notte} other {# notti}}",
+    "difficulty": "Difficoltà: {level, select, easy {facile} moderate {moderata} challenging {impegnativa} other {—}}",
+    "minAge": "Età minima {age} anni",
+    "groupSize": "Gruppi da {min} a {max} persone",
+    "groupMax": "Gruppi di massimo {max} persone",
+    "nextDeparture": "Prossima partenza: {date}",
+    "onRequest": "Su richiesta",
+    "instant": "Conferma immediata",
+    "onRequestLong": "Su richiesta: confermiamo noi la disponibilità",
+    "instantLong": "Conferma immediata",
+    "from": "da",
+    "priceUnit": "{model, select, per_person {a persona} person_types {a persona} group_tiers {a persona} private_group {a gruppo} per_unit {a unità} other {}}",
+    "priceOnRequest": "Prezzo su richiesta",
+    "highlights": "Punti salienti",
+    "itinerary": "Itinerario",
+    "day": "Giorno {n}",
+    "meal": "{meal, select, breakfast {Colazione} lunch {Pranzo} dinner {Cena} other {}}",
+    "included": "Incluso",
+    "notIncluded": "Non incluso",
+    "meetingPoint": "Punto d’incontro",
+    "endPoint": "Arrivo",
+    "openMap": "Apri in Google Maps",
+    "whatToBring": "Cosa portare",
+    "importantInfo": "Informazioni importanti",
+    "cancellationPolicy": "Cancellazione",
+    "personType": "{type, select, adult {Adulti} child {Bambini} infant {Neonati} youth {Ragazzi} senior {Senior} student {Studenti} other {Partecipanti}}",
+    "peopleCount": "{count, plural, one {# persona} other {# persone}}",
+    "unitsCount": "{count, plural, one {# unità} other {# unità}}",
+    "booking": {
+      "title": "Prenota",
+      "notBookable": "Al momento questo tour non è prenotabile online. Contattaci per informazioni.",
+      "fixedDepartures": "Partenze programmate",
+      "openDates": "Scegli la data",
+      "loading": "Caricamento disponibilità…",
+      "availabilityError": "Impossibile caricare le disponibilità.",
+      "retry": "Riprova",
+      "noDepartures": "Nessuna partenza disponibile al momento.",
+      "noDates": "Nessuna data disponibile al momento.",
+      "showAll": "Mostra tutte le partenze ({count})",
+      "showLess": "Mostra meno",
+      "seatsLeft": "{count, plural, one {# posto disponibile} other {# posti disponibili}}",
+      "soldOut": "Esaurito",
+      "closed": "Chiusa",
+      "guaranteed": "Partenza garantita",
+      "returnOn": "Rientro il {date}",
+      "chooseTime": "Orario",
+      "allDay": "Giornata intera",
+      "previousMonth": "Mese precedente",
+      "nextMonth": "Mese successivo",
+      "participants": "Partecipanti",
+      "people": "Persone",
+      "units": "Unità",
+      "unitCapacity": "fino a {count, plural, one {# persona} other {# persone}}",
+      "free": "Gratis",
+      "ageRange": "{min}–{max} anni",
+      "ageFrom": "da {min} anni",
+      "ageTo": "fino a {max} anni",
+      "perPersonHint": "{price} a persona",
+      "tierHint": "{max, plural, =0 {da {min}} other {{min}–{max}}} pers.: {price}",
+      "privateGroupHint": "{price} fino a {included} persone, poi {extra} a persona",
+      "extras": "Extra",
+      "required": "incluso",
+      "extraPer": "{per, select, booking {a prenotazione} person {a persona} day {al giorno} unit {a unità} other {}}",
+      "calculating": "Calcolo del prezzo…",
+      "base": "{units, plural, =0 {{people, plural, one {# partecipante} other {# partecipanti}}} other {{units, plural, one {# unità} other {# unità}}}}",
+      "dateSupplement": "Supplemento data",
+      "dateDiscount": "Sconto data",
+      "priceOnRequest": "Prezzo su richiesta: ti invieremo un preventivo",
+      "selectDate": "Scegli una data per completare la prenotazione.",
+      "book": "Prenota",
+      "request": "Invia richiesta",
+      "adding": "Aggiunta in corso…",
+      "instantNote": "Conferma immediata dopo il pagamento.",
+      "onRequestNote": "Invii una richiesta senza pagare: verifichiamo la disponibilità e ti mandiamo il link di pagamento.",
+      "quoteNote": "Nessun pagamento ora: ti invieremo un preventivo da confermare."
+    },
+    "errors": {
+      "participants_required": "Indica il numero di partecipanti.",
+      "too_few_participants": "Servono almeno {min} partecipanti.",
+      "too_many_participants": "Massimo {max} partecipanti per prenotazione.",
+      "type_min": "Servono almeno {min} partecipanti di questa tipologia.",
+      "type_max": "Massimo {max} partecipanti di questa tipologia.",
+      "no_tier": "Nessun prezzo previsto per questo numero di partecipanti.",
+      "group_too_large": "Il gruppo può avere al massimo {max} persone.",
+      "units_required": "Indica quante unità vuoi prenotare.",
+      "too_many_units": "Massimo {max} unità per prenotazione.",
+      "unit_capacity": "Ogni unità ospita al massimo {capacity} persone.",
+      "not_enough_seats": "{remaining, plural, =0 {Posti esauriti per questa data.} one {È rimasto solo # posto.} other {Sono rimasti solo # posti.}}",
+      "date_required": "Scegli una data.",
+      "date_unavailable": "Data non disponibile.",
+      "time_unavailable": "Orario non disponibile.",
+      "too_late": "Non è più possibile prenotare questa data.",
+      "too_far": "Questa data non è ancora prenotabile.",
+      "departure_closed": "Questa partenza non è prenotabile.",
+      "departure_not_found": "Partenza non trovata.",
+      "mode_unavailable": "Questa modalità di prenotazione non è disponibile.",
+      "price_missing": "Prezzo non configurato: contattaci."
+    }
+  },
+  "WineMap": {
+    "legend": "Destinazioni",
+    "cta": "Vedi le esperienze",
+    "experiences": "{count, plural, one {# esperienza} other {# esperienze}}",
+    "comingSoon": "Esperienze in arrivo",
+    "groups": {
+      "europe": "Europa",
+      "americas": "Americhe",
+      "africa": "Africa",
+      "asia": "Asia",
+      "oceania": "Oceania"
+    },
+    "lens": {
+      "name": "Europa",
+      "open": "Ingrandisci l’Europa",
+      "close": "Chiudi la lente"
+    }
+  },
+  "Faq": {
+    "title": "Domande frequenti",
+    "homeIntro": "Tutto quello che c'è da sapere prima di partire: prenotazioni, degustazioni, trasferimenti e cancellazioni."
+  }
+}

@@ -88,12 +88,13 @@ const styles = {
     base: [
       "font-sans antialiased",
       // Headings (without spacing)
-      "[&_h1]:text-4xl [&_h1]:font-medium [&_h1]:tracking-tight",
-      "[&_h2]:text-3xl [&_h2]:font-medium [&_h2]:tracking-tight",
-      "[&_h3]:text-2xl [&_h3]:font-medium [&_h3]:tracking-tight",
-      "[&_h4]:text-xl [&_h4]:font-medium [&_h4]:tracking-tight",
-      "[&_h5]:text-lg [&_h5]:font-medium [&_h5]:tracking-tight",
-      "[&_h6]:text-base [&_h6]:font-medium [&_h6]:tracking-tight",
+      // h1–h3 use the display face (EB Garamond, see globals.css); h4–h6 stay in the text face
+      "[&_h1]:text-4xl md:[&_h1]:text-5xl [&_h1]:font-medium [&_h1]:tracking-tight",
+      "[&_h2]:text-3xl md:[&_h2]:text-4xl [&_h2]:font-medium [&_h2]:tracking-tight",
+      "[&_h3]:text-2xl [&_h3]:font-medium",
+      "[&_h4]:text-xl [&_h4]:font-semibold",
+      "[&_h5]:text-lg [&_h5]:font-semibold",
+      "[&_h6]:text-base [&_h6]:font-semibold",
       // Text elements
       "[&_p]:text-base [&_p]:leading-7 [&_p]:mb-4",
       "[&_strong]:font-semibold",
@@ -118,7 +119,7 @@ const styles = {
       // Unordered lists
       "[&_ul]:pl-0 [&_ul]:list-none [&_ul]:space-y-2",
       "[&_ul_li]:relative [&_ul_li]:pl-6",
-      "[&_ul_li]:before:absolute [&_ul_li]:before:left-1 [&_ul_li]:before:top-[0.6875em] [&_ul_li]:before:h-1.5 [&_ul_li]:before:w-1.5 [&_ul_li]:before:rounded-full [&_ul_li]:before:bg-foreground/80",
+      "[&_ul_li]:before:absolute [&_ul_li]:before:left-1 [&_ul_li]:before:top-[0.6875em] [&_ul_li]:before:h-1.5 [&_ul_li]:before:w-1.5 [&_ul_li]:before:rounded-full [&_ul_li]:before:bg-primary",
       // Ordered lists
       "[&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2",
       "[&_ol_ol]:list-[lower-alpha] [&_ol_ol]:pl-6",
@@ -130,8 +131,8 @@ const styles = {
       "[&_li_ul]:mt-2 [&_li_ol]:mt-2",
       "[&_li_ul]:mb-0 [&_li_ol]:mb-0",
       // Nested unordered list styles
-      "[&_ul_ul_li]:before:bg-foreground/60",
-      "[&_ul_ul_ul_li]:before:bg-foreground/40",
+      "[&_ul_ul_li]:before:bg-primary/60",
+      "[&_ul_ul_ul_li]:before:bg-primary/40",
       // Task lists
       "[&_li]:has([type=checkbox]):pl-8",
       "[&_li]:has([type=checkbox]):list-none",
@@ -161,9 +162,9 @@ const styles = {
       "[&_figure_figcaption]:text-sm [&_figure_figcaption]:mt-2 [&_figure_figcaption]:text-muted-foreground",
     ],
     misc: [
-      "[&_blockquote]:border-l-4 [&_blockquote]:border-primary/20 [&_blockquote]:pl-4 [&_blockquote]:py-1 [&_blockquote]:my-4 [&_blockquote]:text-muted-foreground",
+      "[&_blockquote]:border-l-2 [&_blockquote]:border-primary [&_blockquote]:pl-5 [&_blockquote]:py-1 [&_blockquote]:my-6 [&_blockquote]:font-display [&_blockquote]:italic [&_blockquote]:text-xl [&_blockquote]:leading-snug",
       "[&_blockquote_blockquote]:mt-4",
-      "[&_hr]:my-8 [&_hr]:border-t-2 [&_hr]:border-muted",
+      "[&_hr]:my-8 [&_hr]:border-t [&_hr]:border-border",
       "[&_abbr]:cursor-help [&_abbr]:underline [&_abbr]:underline-dotted [&_abbr]:underline-offset-4",
       "[&_details]:rounded-lg [&_details]:border [&_details]:px-4 [&_details]:py-2 [&_details]:my-4",
       "[&_summary]:cursor-pointer [&_summary]:font-semibold",
@@ -180,7 +181,7 @@ const styles = {
   layout: {
     spacing: "[&>*+*]:mt-6",
     article: "max-w-prose",
-    container: "max-w-5xl mx-auto p-6 sm:p-8",
+    container: "max-w-6xl mx-auto px-4 py-6 sm:p-8",
     section: "py-8 md:py-12",
   },
 };

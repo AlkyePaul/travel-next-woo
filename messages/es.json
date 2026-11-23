@@ -1,0 +1,392 @@
+{
+  "Metadata": {
+    "description": "Metadata.description"
+  },
+  "Nav": {
+    "home": "Inicio",
+    "shop": "Nav.shop",
+    "blog": "Blog",
+    "categories": "Categorías",
+    "tags": "Etiquetas",
+    "authors": "Autores",
+    "menu": "Menú",
+    "blogMenu": "Menú del blog",
+    "toggleMenu": "Nav.toggleMenu",
+    "website": "Nav.website",
+    "cart": "Nav.cart"
+  },
+  "LocaleSwitcher": {
+    "label": "Idioma",
+    "locale": "{locale, select, it {Italiano} es {Español} en {English} other {{locale}}}"
+  },
+  "Footer": {
+    "rights": "Todos los derechos reservados.",
+    "experiences": "Footer.experiences"
+  },
+  "NotFound": {
+    "title": "NotFound.title",
+    "description": "NotFound.description",
+    "backHome": "Volver al inicio",
+    "browse": "NotFound.browse"
+  },
+  "Common": {
+    "loading": "Cargando...",
+    "noImageAvailable": "Sin imagen disponible",
+    "continueShopping": "Common.continueShopping",
+    "goBack": "Volver",
+    "toggleTheme": "Cambiar tema",
+    "close": "Cerrar",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "tax": "Impuestos",
+    "total": "Total",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "previousPage": "Ir a la página anterior",
+    "nextPage": "Ir a la página siguiente"
+  },
+  "Home": {
+    "hero": {
+      "title": "Home.hero.title",
+      "intro": "Home.hero.intro",
+      "regions": "Home.hero.regions",
+      "cta": "Home.hero.cta"
+    },
+    "durations": {
+      "title": "Home.durations.title",
+      "intro": "Home.durations.intro"
+    },
+    "featured": {
+      "title": "Home.featured.title",
+      "all": "Home.featured.all"
+    },
+    "booking": {
+      "title": "Home.booking.title",
+      "steps": {
+        "choose": {
+          "title": "Home.booking.steps.choose.title",
+          "description": "Home.booking.steps.choose.description"
+        },
+        "confirm": {
+          "title": "Home.booking.steps.confirm.title",
+          "description": "Home.booking.steps.confirm.description"
+        },
+        "pay": {
+          "title": "Home.booking.steps.pay.title",
+          "description": "Home.booking.steps.pay.description"
+        }
+      }
+    },
+    "map": {
+      "title": "Home.map.title",
+      "intro": "Home.map.intro"
+    }
+  },
+  "Experiences": {
+    "hours": {
+      "duration": "Experiences.hours.duration",
+      "title": "Experiences.hours.title",
+      "description": "Experiences.hours.description",
+      "link": "Experiences.hours.link"
+    },
+    "day": {
+      "duration": "Experiences.day.duration",
+      "title": "Experiences.day.title",
+      "description": "Experiences.day.description",
+      "link": "Experiences.day.link"
+    },
+    "days": {
+      "duration": "Experiences.days.duration",
+      "title": "Experiences.days.title",
+      "description": "Experiences.days.description",
+      "link": "Experiences.days.link"
+    }
+  },
+  "Cart": {
+    "title": "Carrito de compra",
+    "loading": "Cargando carrito...",
+    "empty": "Tu carrito está vacío",
+    "emptyDescription": "Cart.emptyDescription",
+    "clear": "Vaciar carrito",
+    "remove": "Eliminar",
+    "orderSummary": "Resumen del pedido",
+    "subtotalItems": "Subtotal ({count, plural, one {# artículo} other {# artículos}})",
+    "proceedToCheckout": "Finalizar compra",
+    "viewCart": "Ver carrito",
+    "open": "Abrir carrito",
+    "drawerTitle": "Tu carrito ({count})"
+  },
+  "Checkout": {
+    "title": "Checkout",
+    "emptyDescription": "Checkout.emptyDescription",
+    "billingDetails": "Datos de facturación",
+    "firstName": "Nombre *",
+    "lastName": "Apellidos *",
+    "company": "Empresa (opcional)",
+    "email": "Correo electrónico *",
+    "phone": "Teléfono *",
+    "address": "Dirección *",
+    "addressPlaceholder": "Nombre de la calle y número",
+    "address2Placeholder": "Piso, puerta, bloque, etc. (opcional)",
+    "city": "Ciudad *",
+    "state": "Provincia *",
+    "postcode": "Código postal *",
+    "country": "País *",
+    "orderNotes": "Notas del pedido (opcional)",
+    "notesPlaceholder": "Notas sobre tu pedido, p. ej. indicaciones para la entrega",
+    "yourOrder": "Tu pedido",
+    "quantity": "Cant.: {quantity}",
+    "shippingNextStep": "Se calcula en el siguiente paso",
+    "processing": "Procesando...",
+    "proceedToPayment": "Ir al pago",
+    "terms": "Al realizar tu pedido, aceptas nuestros Términos del servicio y nuestra Política de privacidad.",
+    "errors": {
+      "emailRequired": "El correo electrónico es obligatorio.",
+      "cartEmpty": "Tu carrito está vacío.",
+      "orderFailed": "No se pudo crear el pedido. Inténtalo de nuevo.",
+      "generic": "Algo salió mal. Inténtalo de nuevo.",
+      "bookingUnavailable": "Una reserva ya no está disponible. Actualiza el carrito e inténtalo de nuevo."
+    },
+    "sendRequest": "Enviar solicitud de reserva",
+    "requestNote": "Una o más reservas necesitan nuestra confirmación: ahora no pagas nada. Recibirás un correo con el enlace de pago en cuanto confirmemos."
+  },
+  "CheckoutSuccess": {
+    "title": "CheckoutSuccess.title",
+    "description": "CheckoutSuccess.description",
+    "orderNumber": "Número de pedido",
+    "viewOrder": "Ver pedido",
+    "loading": "Cargando detalles del pedido...",
+    "requestTitle": "CheckoutSuccess.requestTitle",
+    "requestDescription": "Hemos recibido tu solicitud de reserva. Comprobamos la disponibilidad y te respondemos lo antes posible: si se confirma, recibirás un correo con el enlace de pago.",
+    "requestNumber": "Número de solicitud"
+  },
+  "Shop": {
+    "title": "Shop.title",
+    "metaDescription": "Shop.metaDescription",
+    "productsFound": "Shop.productsFound",
+    "matching": "para “{search}”",
+    "productCount": "Shop.productCount",
+    "categoryNotFound": "Categoría no encontrada",
+    "categoryDescription": "Shop.categoryDescription",
+    "intro": "Shop.intro",
+    "empty": "Shop.empty"
+  },
+  "Filters": {
+    "search": "Buscar",
+    "searchPlaceholder": "Filters.searchPlaceholder",
+    "category": "Categoría",
+    "allCategories": "Todas las categorías",
+    "tag": "Etiqueta",
+    "allTags": "Todas las etiquetas",
+    "sortBy": "Ordenar por",
+    "sort": {
+      "default": "Filters.sort.default",
+      "popularity": "Filters.sort.popularity",
+      "rating": "Filters.sort.rating",
+      "date": "Filters.sort.date",
+      "price": "Filters.sort.price",
+      "priceDesc": "Filters.sort.priceDesc"
+    },
+    "priceRange": "Rango de precios",
+    "min": "Mín.",
+    "max": "Máx.",
+    "clear": "Borrar filtros",
+    "open": "Filters.open",
+    "showResults": "Filters.showResults"
+  },
+  "Product": {
+    "notFound": "Product.notFound",
+    "reviewCount": "({count, plural, one {# reseña} other {# reseñas}})",
+    "sku": "SKU:",
+    "tags": "Etiquetas:",
+    "description": "Descripción",
+    "reviews": "Reseñas ({count})",
+    "verified": "Verificado",
+    "related": "Product.related",
+    "featured": "Destacado",
+    "priceOnRequest": "Precio a consultar",
+    "save": "Ahorra un {percent}%",
+    "thumbnailAlt": "{name} – imagen {index}",
+    "quantity": "Cantidad:",
+    "addToCart": "Añadir al carrito",
+    "adding": "Añadiendo...",
+    "selectOptions": "Selecciona las opciones",
+    "outOfStock": "Agotado",
+    "stock": {
+      "inStock": "En stock",
+      "outOfStock": "Agotado",
+      "backorder": "Disponible bajo pedido",
+      "lowStock": "{count, plural, one {Solo queda #} other {Solo quedan #}} en stock"
+    }
+  },
+  "Posts": {
+    "title": "Blog",
+    "metaTitle": "Entradas del blog",
+    "metaDescription": "Posts.metaDescription",
+    "found": "{count, plural, one {# entrada encontrada} other {# entradas encontradas}}",
+    "matchingSearch": "para tu búsqueda",
+    "noPosts": "No se encontraron entradas",
+    "searchPlaceholder": "Buscar entradas...",
+    "allTags": "Todas las etiquetas",
+    "noTags": "No se encontraron etiquetas",
+    "allCategories": "Todas las categorías",
+    "noCategories": "No se encontraron categorías",
+    "allAuthors": "Todos los autores",
+    "noAuthors": "No se encontraron autores",
+    "resetFilters": "Restablecer filtros",
+    "published": "Publicado el {date}",
+    "byAuthor": "por <link>{author}</link>",
+    "noExcerpt": "Sin extracto disponible",
+    "untitled": "Entrada sin título",
+    "uncategorized": "Sin categoría",
+    "thumbnailAlt": "Miniatura de la entrada",
+    "authors": {
+      "title": "Todos los autores",
+      "description": "Explora todos los autores de las entradas del blog",
+      "empty": "Aún no hay autores disponibles."
+    },
+    "categories": {
+      "title": "Todas las categorías",
+      "description": "Explora todas las categorías de las entradas del blog",
+      "empty": "Aún no hay categorías disponibles."
+    },
+    "tags": {
+      "title": "Todas las etiquetas",
+      "description": "Explora todas las etiquetas de las entradas del blog",
+      "empty": "Aún no hay etiquetas disponibles."
+    },
+    "readingTime": "{minutes} min de lectura",
+    "featured": "Destacado",
+    "related": "Más artículos",
+    "backToBlog": "Volver al blog"
+  },
+  "Pages": {
+    "title": "Todas las páginas",
+    "description": "Explora todas las páginas",
+    "empty": "Aún no hay páginas disponibles."
+  },
+  "Tour": {
+    "kind": "{kind, select, experience {Experiencia} day_tour {Excursión de un día} multi_day {Paquete de varios días} other {Tour}}",
+    "duration": "{unit, select, minutes {{value, number} min} hours {{value, plural, one {# hora} other {# horas}}} days {{value, plural, one {# día} other {# días}}} other {{value, number}}}",
+    "nights": "{count, plural, one {# noche} other {# noches}}",
+    "difficulty": "Dificultad: {level, select, easy {fácil} moderate {moderada} challenging {exigente} other {—}}",
+    "minAge": "Edad mínima {age} años",
+    "groupSize": "Grupos de {min} a {max} personas",
+    "groupMax": "Grupos de máximo {max} personas",
+    "nextDeparture": "Próxima salida: {date}",
+    "onRequest": "Bajo petición",
+    "instant": "Confirmación inmediata",
+    "onRequestLong": "Bajo petición: confirmamos nosotros la disponibilidad",
+    "instantLong": "Confirmación inmediata",
+    "from": "desde",
+    "priceUnit": "{model, select, per_person {por persona} person_types {por persona} group_tiers {por persona} private_group {por grupo} per_unit {por unidad} other {}}",
+    "priceOnRequest": "Precio bajo petición",
+    "highlights": "Lo más destacado",
+    "itinerary": "Itinerario",
+    "day": "Día {n}",
+    "meal": "{meal, select, breakfast {Desayuno} lunch {Almuerzo} dinner {Cena} other {}}",
+    "included": "Incluido",
+    "notIncluded": "No incluido",
+    "meetingPoint": "Punto de encuentro",
+    "endPoint": "Llegada",
+    "openMap": "Abrir en Google Maps",
+    "whatToBring": "Qué llevar",
+    "importantInfo": "Información importante",
+    "cancellationPolicy": "Cancelación",
+    "personType": "{type, select, adult {Adultos} child {Niños} infant {Bebés} youth {Jóvenes} senior {Mayores} student {Estudiantes} other {Participantes}}",
+    "peopleCount": "{count, plural, one {# persona} other {# personas}}",
+    "unitsCount": "{count, plural, one {# unidad} other {# unidades}}",
+    "booking": {
+      "title": "Reservar",
+      "notBookable": "Por ahora este tour no se puede reservar en línea. Contáctanos para más información.",
+      "fixedDepartures": "Salidas programadas",
+      "openDates": "Elige la fecha",
+      "loading": "Cargando disponibilidad…",
+      "availabilityError": "No se pudo cargar la disponibilidad.",
+      "retry": "Reintentar",
+      "noDepartures": "No hay salidas disponibles por ahora.",
+      "noDates": "No hay fechas disponibles por ahora.",
+      "showAll": "Ver todas las salidas ({count})",
+      "showLess": "Ver menos",
+      "seatsLeft": "{count, plural, one {# plaza disponible} other {# plazas disponibles}}",
+      "soldOut": "Agotado",
+      "closed": "Cerrada",
+      "guaranteed": "Salida garantizada",
+      "returnOn": "Regreso el {date}",
+      "chooseTime": "Horario",
+      "allDay": "Todo el día",
+      "previousMonth": "Mes anterior",
+      "nextMonth": "Mes siguiente",
+      "participants": "Participantes",
+      "people": "Personas",
+      "units": "Unidades",
+      "unitCapacity": "hasta {count, plural, one {# persona} other {# personas}}",
+      "free": "Gratis",
+      "ageRange": "{min}–{max} años",
+      "ageFrom": "desde {min} años",
+      "ageTo": "hasta {max} años",
+      "perPersonHint": "{price} por persona",
+      "tierHint": "{max, plural, =0 {desde {min}} other {{min}–{max}}} pers.: {price}",
+      "privateGroupHint": "{price} hasta {included} personas, luego {extra} por persona",
+      "extras": "Extras",
+      "required": "incluido",
+      "extraPer": "{per, select, booking {por reserva} person {por persona} day {por día} unit {por unidad} other {}}",
+      "calculating": "Calculando el precio…",
+      "base": "{units, plural, =0 {{people, plural, one {# participante} other {# participantes}}} other {{units, plural, one {# unidad} other {# unidades}}}}",
+      "dateSupplement": "Suplemento por fecha",
+      "dateDiscount": "Descuento por fecha",
+      "priceOnRequest": "Precio bajo petición: te enviaremos un presupuesto",
+      "selectDate": "Elige una fecha para completar la reserva.",
+      "book": "Reservar",
+      "request": "Enviar solicitud",
+      "adding": "Añadiendo…",
+      "instantNote": "Confirmación inmediata tras el pago.",
+      "onRequestNote": "Envías una solicitud sin pagar: comprobamos la disponibilidad y te enviamos el enlace de pago.",
+      "quoteNote": "No pagas nada ahora: te enviaremos un presupuesto para confirmar."
+    },
+    "errors": {
+      "participants_required": "Indica el número de participantes.",
+      "too_few_participants": "Se necesitan al menos {min} participantes.",
+      "too_many_participants": "Máximo {max} participantes por reserva.",
+      "type_min": "Se necesitan al menos {min} participantes de este tipo.",
+      "type_max": "Máximo {max} participantes de este tipo.",
+      "no_tier": "No hay precio para este número de participantes.",
+      "group_too_large": "El grupo puede tener como máximo {max} personas.",
+      "units_required": "Indica cuántas unidades quieres reservar.",
+      "too_many_units": "Máximo {max} unidades por reserva.",
+      "unit_capacity": "Cada unidad admite como máximo {capacity} personas.",
+      "not_enough_seats": "{remaining, plural, =0 {No quedan plazas para esta fecha.} one {Solo queda # plaza.} other {Solo quedan # plazas.}}",
+      "date_required": "Elige una fecha.",
+      "date_unavailable": "Fecha no disponible.",
+      "time_unavailable": "Horario no disponible.",
+      "too_late": "Ya no se puede reservar esta fecha.",
+      "too_far": "Esta fecha aún no se puede reservar.",
+      "departure_closed": "Esta salida no se puede reservar.",
+      "departure_not_found": "Salida no encontrada.",
+      "mode_unavailable": "Esta modalidad de reserva no está disponible.",
+      "price_missing": "Precio no configurado: contáctanos."
+    }
+  },
+  "WineMap": {
+    "legend": "WineMap.legend",
+    "cta": "WineMap.cta",
+    "experiences": "WineMap.experiences",
+    "comingSoon": "WineMap.comingSoon",
+    "groups": {
+      "europe": "WineMap.groups.europe",
+      "americas": "WineMap.groups.americas",
+      "africa": "WineMap.groups.africa",
+      "asia": "WineMap.groups.asia",
+      "oceania": "WineMap.groups.oceania"
+    },
+    "lens": {
+      "name": "WineMap.lens.name",
+      "open": "WineMap.lens.open",
+      "close": "WineMap.lens.close"
+    }
+  },
+  "Faq": {
+    "title": "Faq.title",
+    "homeIntro": "Faq.homeIntro"
+  }
+}

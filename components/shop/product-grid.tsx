@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { Product } from "@/lib/woocommerce.d";
 import { ProductCard } from "./product-card";
 
@@ -7,10 +8,12 @@ interface ProductGridProps {
 }
 
 export function ProductGrid({ products, columns = 4 }: ProductGridProps) {
+  const t = useTranslations("Shop");
+
   if (products.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-muted-foreground">No products found.</p>
+      <div className="rounded-lg border border-dashed py-12 px-6 text-center">
+        <p className="text-muted-foreground">{t("empty")}</p>
       </div>
     );
   }

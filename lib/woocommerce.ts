@@ -702,11 +702,11 @@ export async function getEnabledPaymentGateways(): Promise<PaymentGateway[]> {
 
 export function formatPrice(
   price: string | number,
-  currency: string = "USD"
+  { locale = "en-US", currency = "USD" }: { locale?: string; currency?: string } = {}
 ): string {
   const numericPrice = typeof price === "string" ? parseFloat(price) : price;
 
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
   }).format(numericPrice);
@@ -735,20 +735,28 @@ export function isProductInStock(product: Product): boolean {
   );
 }
 
-export function getProductStockMessage(product: Product): string {
+export type ProductStockStatus =
+  | { status: "inStock" }
+  | { status: "outOfStock" }
+  | { status: "backorder" }
+  | { status: "lowStock"; quantity: number };
+
+// Returns a status (not a message) so components can translate it
+export function getProductStockStatus(product: Product): ProductStockStatus {
   if (!isProductInStock(product)) {
     if (product.stock_status === "onbackorder") {
-      return "Available on backorder";
+      return { status: "backorder" };
     }
-    return "Out of stock";
+    return { status: "outOfStock" };
   }
 
-  if (product.manage_stock && product.stock_quantity !== null) {
-    if (product.stock_quantity <= (product.low_stock_amount || 3)) {
-      return `Only ${product.stock_quantity} left in stock`;
-    }
-    return "In stock";
+  if (
+    product.manage_stock &&
+    product.stock_quantity !== null &&
+    product.stock_quantity <= (product.low_stock_amount || 3)
+  ) {
+    return { status: "lowStock", quantity: product.stock_quantity };
   }
 
-  return "In stock";
+  return { status: "inStock" };
 }

@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const wordpressHostname =
   process.env.WORDPRESS_HOSTNAME || "us1.wpdemo.org";
@@ -17,10 +20,20 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
+    // The blog used to live at /posts
+    const blogRedirects = [
+      { source: "/posts/:path*", destination: "/blog/:path*", permanent: true },
+      {
+        source: "/:locale(it|es|en)/posts/:path*",
+        destination: "/:locale/blog/:path*",
+        permanent: true,
+      },
+    ];
     if (!wordpressUrl) {
-      return [];
+      return blogRedirects;
     }
     return [
+      ...blogRedirects,
       {
         source: "/admin",
         destination: `${wordpressUrl}/wp-admin`,
@@ -30,4 +43,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

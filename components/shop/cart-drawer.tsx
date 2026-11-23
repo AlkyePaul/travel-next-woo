@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { ShoppingCart, X, Plus, Minus, Trash2 } from "lucide-react";
 
@@ -16,7 +17,9 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { CartBookingDetails } from "@/components/tours/cart-booking";
 import { Separator } from "@/components/ui/separator";
+import { ProductImageFallback } from "@/components/shop/product-image-fallback";
 
 export function CartDrawer() {
   const {
@@ -26,11 +29,16 @@ export function CartDrawer() {
     openCart,
     closeCart,
     removeItem,
+    removeLine,
     updateQuantity,
     getItemCount,
   } = useCart();
 
   const itemCount = getItemCount();
+  const t = useTranslations("Cart");
+  const tc = useTranslations("Common");
+  const locale = useLocale();
+  const price = (value: string) => formatPrice(value, { locale });
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => (open ? openCart() : closeCart())}>
@@ -42,29 +50,32 @@ export function CartDrawer() {
               {itemCount > 99 ? "99+" : itemCount}
             </span>
           )}
-          <span className="sr-only">Open cart</span>
+          <span className="sr-only">{t("open")}</span>
         </Button>
       </SheetTrigger>
 
-      <SheetContent className="flex flex-col w-full sm:max-w-lg">
+      <SheetContent
+        className="flex flex-col w-full sm:max-w-lg"
+        closeLabel={tc("close")}
+      >
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
             <ShoppingCart className="h-5 w-5" />
-            Your Cart ({itemCount})
+            {t("drawerTitle", { count: itemCount })}
           </SheetTitle>
         </SheetHeader>
 
         {isLoading ? (
           <div className="flex-1 flex items-center justify-center">
-            <div className="animate-pulse text-muted-foreground">Loading...</div>
+            <div className="animate-pulse text-muted-foreground">{tc("loading")}</div>
           </div>
         ) : cart.items.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center gap-4">
             <ShoppingCart className="h-16 w-16 text-muted-foreground/50" />
-            <p className="text-muted-foreground">Your cart is empty</p>
+            <p className="text-muted-foreground">{t("empty")}</p>
             <SheetClose asChild>
               <Button asChild>
-                <Link href="/shop">Continue Shopping</Link>
+                <Link href="/shop">{tc("continueShopping")}</Link>
               </Button>
             </SheetClose>
           </div>
@@ -74,7 +85,7 @@ export function CartDrawer() {
               <div className="space-y-4 py-4">
                 {cart.items.map((item) => (
                   <div
-                    key={`${item.productId}-${item.variationId || ""}`}
+                    key={item.key ?? `${item.productId}-${item.variationId || ""}`}
                     className="flex gap-4"
                   >
                     {/* Image */}
@@ -88,9 +99,7 @@ export function CartDrawer() {
                           sizes="80px"
                         />
                       ) : (
-                        <div className="flex items-center justify-center w-full h-full text-muted-foreground text-xs">
-                          No image
-                        </div>
+                        <ProductImageFallback categorySlugs={[]} />
                       )}
                     </div>
 
@@ -106,63 +115,84 @@ export function CartDrawer() {
                         </p>
                       )}
 
-                      <p className="font-medium mt-1">
-                        {formatPrice(item.price)}
-                      </p>
-
-                      {/* Quantity Controls */}
-                      <div className="flex items-center gap-2 mt-2">
-                        <div className="flex items-center border rounded-md">
+                      {item.booking ? (
+                        <>
+                          <CartBookingDetails booking={item.booking} className="mt-1" />
                           <Button
                             variant="ghost"
-                            size="icon"
-                            className="h-7 w-7"
-                            onClick={() =>
-                              updateQuantity(
-                                item.productId,
-                                item.quantity - 1,
-                                item.variationId
-                              )
-                            }
+                            size="sm"
+                            className="h-7 px-2 mt-1 -ml-2 text-destructive"
+                            onClick={() => item.key && removeLine(item.key)}
                           >
-                            <Minus className="h-3 w-3" />
+                            <Trash2 className="h-4 w-4 mr-1" />
+                            {t("remove")}
                           </Button>
-                          <span className="w-8 text-center text-sm">
-                            {item.quantity}
-                          </span>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-7 w-7"
-                            onClick={() =>
-                              updateQuantity(
-                                item.productId,
-                                item.quantity + 1,
-                                item.variationId
-                              )
-                            }
-                          >
-                            <Plus className="h-3 w-3" />
-                          </Button>
-                        </div>
+                        </>
+                      ) : (
+                        <>
+                          <p className="font-medium mt-1">
+                            {price(item.price)}
+                          </p>
 
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-7 w-7 text-destructive"
-                          onClick={() =>
-                            removeItem(item.productId, item.variationId)
-                          }
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
+                          {/* Quantity Controls */}
+                          <div className="flex items-center gap-2 mt-2">
+                            <div className="flex items-center border rounded-md">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-7 w-7"
+                                onClick={() =>
+                                  updateQuantity(
+                                    item.productId,
+                                    item.quantity - 1,
+                                    item.variationId
+                                  )
+                                }
+                              >
+                                <Minus className="h-3 w-3" />
+                              </Button>
+                              <span className="w-8 text-center text-sm">
+                                {item.quantity}
+                              </span>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-7 w-7"
+                                disabled={
+                                item.soldIndividually ||
+                                (item.quantityLimits !== undefined && item.quantity >= item.quantityLimits.max)
+                              }
+                                onClick={() =>
+                                  updateQuantity(
+                                    item.productId,
+                                    item.quantity + 1,
+                                    item.variationId
+                                  )
+                                }
+                              >
+                                <Plus className="h-3 w-3" />
+                              </Button>
+                            </div>
+
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-7 w-7 text-destructive"
+                              onClick={() =>
+                                removeItem(item.productId, item.variationId)
+                              }
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </>
+                      )}
                     </div>
 
                     {/* Line Total */}
                     <div className="text-right">
                       <p className="font-medium">
-                        {formatPrice(
+                        {price(
                           (parseFloat(item.price) * item.quantity).toString()
                         )}
                       </p>
@@ -176,25 +206,25 @@ export function CartDrawer() {
               {/* Totals */}
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Subtotal</span>
-                  <span>{formatPrice(cart.totals.subtotal)}</span>
+                  <span className="text-muted-foreground">{tc("subtotal")}</span>
+                  <span>{price(cart.totals.subtotal)}</span>
                 </div>
                 {parseFloat(cart.totals.shipping) > 0 && (
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Shipping</span>
-                    <span>{formatPrice(cart.totals.shipping)}</span>
+                    <span className="text-muted-foreground">{tc("shipping")}</span>
+                    <span>{price(cart.totals.shipping)}</span>
                   </div>
                 )}
                 {parseFloat(cart.totals.tax) > 0 && (
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Tax</span>
-                    <span>{formatPrice(cart.totals.tax)}</span>
+                    <span className="text-muted-foreground">{tc("tax")}</span>
+                    <span>{price(cart.totals.tax)}</span>
                   </div>
                 )}
                 <Separator />
                 <div className="flex justify-between font-medium">
-                  <span>Total</span>
-                  <span>{formatPrice(cart.totals.total)}</span>
+                  <span>{tc("total")}</span>
+                  <span>{price(cart.totals.total)}</span>
                 </div>
               </div>
 
@@ -202,12 +232,12 @@ export function CartDrawer() {
               <div className="space-y-2">
                 <SheetClose asChild>
                   <Button asChild className="w-full" size="lg">
-                    <Link href="/checkout">Proceed to Checkout</Link>
+                    <Link href="/checkout">{t("proceedToCheckout")}</Link>
                   </Button>
                 </SheetClose>
                 <SheetClose asChild>
                   <Button variant="outline" asChild className="w-full">
-                    <Link href="/cart">View Cart</Link>
+                    <Link href="/cart">{t("viewCart")}</Link>
                   </Button>
                 </SheetClose>
               </div>

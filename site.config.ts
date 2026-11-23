@@ -4,8 +4,9 @@ type SiteConfig = {
   site_description: string;
 };
 
+// site_name is a working title: change it here and it updates nav, footer and <title>.
 export const siteConfig: SiteConfig = {
-  site_name: "next-woo",
-  site_description: "Headless WooCommerce store powered by Next.js",
+  site_name: "Vigne & Viaggi",
+  site_description: "Esperienze e viaggi del vino in Italia",
   site_domain: "https://next-woo.com",
 };

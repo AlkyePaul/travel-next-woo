@@ -35,7 +35,11 @@ class Next_Revalidation {
         // Post save/update hooks - any post status change
         add_action('transition_post_status', array($this, 'on_post_status_change'), 10, 3);
         add_action('save_post', array($this, 'on_content_change'), 10, 3);
-        
+
+        // Translations saved in the background by the Next i18n plugin (post meta
+        // updates don't fire save_post)
+        add_action('next_i18n_translations_updated', array($this, 'on_content_change'), 10, 1);
+
         // Trash and delete hooks with higher priority to ensure they run
         add_action('trashed_post', array($this, 'on_post_trash'), 5);
         add_action('untrashed_post', array($this, 'on_post_untrash'), 5);

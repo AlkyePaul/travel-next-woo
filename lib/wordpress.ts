@@ -218,7 +218,26 @@ export async function getRecentPosts(filterParams?: {
 }
 
 export async function getPostById(id: number): Promise<Post> {
-  return wordpressFetch<Post>(`/wp-json/wp/v2/posts/${id}`);
+  return wordpressFetch<Post>(`/wp-json/wp/v2/posts/${id}`, { _embed: true }, [
+    "wordpress",
+    "posts",
+    `post-${id}`,
+  ]);
+}
+
+/** Latest posts sharing a category with the given post (the post itself excluded). */
+export async function getRelatedPosts(post: Post, limit = 3): Promise<Post[]> {
+  const query: Record<string, any> = {
+    _embed: true,
+    per_page: limit,
+    exclude: post.id,
+  };
+  if (post.categories?.length) query.categories = post.categories.join(",");
+
+  return wordpressFetchGraceful<Post[]>("/wp-json/wp/v2/posts", [], query, [
+    "wordpress",
+    "posts",
+  ]);
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | undefined> {
@@ -282,24 +301,38 @@ export async function getTagBySlug(slug: string): Promise<Tag> {
   );
 }
 
+// WooCommerce's own pages: Next.js has its own /shop, /cart, /checkout and /account
+const WOOCOMMERCE_PAGE_SLUGS = new Set(["shop", "cart", "checkout", "my-account"]);
+
+export function isContentPage(page: Pick<Page, "slug">): boolean {
+  return !WOOCOMMERCE_PAGE_SLUGS.has(page.slug);
+}
+
+/** Content pages only (WooCommerce system pages are left out). */
 export async function getAllPages(): Promise<Page[]> {
-  return wordpressFetchGraceful<Page[]>(
+  const pages = await wordpressFetchGraceful<Page[]>(
     "/wp-json/wp/v2/pages",
     [],
     { per_page: 100 },
     ["wordpress", "pages"]
   );
+  return pages.filter(isContentPage);
 }
 
 export async function getPageById(id: number): Promise<Page> {
-  return wordpressFetch<Page>(`/wp-json/wp/v2/pages/${id}`);
+  return wordpressFetch<Page>(`/wp-json/wp/v2/pages/${id}`, undefined, [
+    "wordpress",
+    "pages",
+    `page-${id}`,
+  ]);
 }
 
 export async function getPageBySlug(slug: string): Promise<Page | undefined> {
   const pages = await wordpressFetchGraceful<Page[]>(
     "/wp-json/wp/v2/pages",
     [],
-    { slug }
+    { slug },
+    ["wordpress", "pages"]
   );
   return pages[0];
 }
@@ -417,7 +450,7 @@ export async function getAllPostsForSitemap(): Promise<Post[]> {
     while (hasMore) {
       const response = await wordpressFetchPaginated<Post[]>(
         "/wp-json/wp/v2/posts",
-        { per_page: 100, page, _fields: "slug,modified" }
+        { per_page: 100, page, _fields: "id,slug,modified" }
       );
       allPosts.push(...response.data);
       hasMore = page < response.headers.totalPages;

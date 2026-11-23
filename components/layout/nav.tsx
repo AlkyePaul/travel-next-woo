@@ -1,12 +1,12 @@
-import Link from "next/link";
-import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/nav/mobile-nav";
+import { LocaleSwitcher } from "@/components/nav/locale-switcher";
+import { useTranslations } from "next-intl";
 import { CartDrawer } from "@/components/shop";
-import { mainMenu } from "@/menu.config";
-import { siteConfig } from "@/site.config";
+import { Wordmark } from "@/components/layout/wordmark";
+import { mainMenu, menuEntries } from "@/menu.config";
 import { cn } from "@/lib/utils";
-import Logo from "@/public/logo.svg";
 
 interface NavProps {
   className?: string;
@@ -15,40 +15,33 @@ interface NavProps {
 }
 
 export function Nav({ className, children, id }: NavProps) {
+  const t = useTranslations("Nav");
+
   return (
     <nav
-      className={cn("sticky z-50 top-0 bg-background", "border-b", className)}
+      className={cn(
+        "sticky z-50 top-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80",
+        className,
+      )}
       id={id}
     >
       <div
         id="nav-container"
-        className="max-w-5xl mx-auto py-4 px-6 sm:px-8 flex justify-between items-center"
+        className="max-w-6xl mx-auto py-3 px-4 sm:px-8 flex justify-between items-center gap-4"
       >
-        <Link
-          className="hover:opacity-75 transition-all flex gap-4 items-center"
-          href="/"
-        >
-          <Image
-            src={Logo}
-            alt="Logo"
-            loading="eager"
-            className="dark:invert"
-            width={42}
-            height={26.44}
-          />
-          <h2 className="text-sm">{siteConfig.site_name}</h2>
+        <Link className="flex items-center hover:opacity-80 transition-opacity" href="/">
+          <Wordmark className="text-lg sm:text-xl" />
         </Link>
         {children}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <div className="mx-2 hidden md:flex">
-            {Object.entries(mainMenu).map(([key, href]) => (
+            {menuEntries(mainMenu).map(([key, href]) => (
               <Button key={href} asChild variant="ghost" size="sm">
-                <Link href={href}>
-                  {key.charAt(0).toUpperCase() + key.slice(1)}
-                </Link>
+                <Link href={href}>{t(key)}</Link>
               </Button>
             ))}
           </div>
+          <LocaleSwitcher />
           <CartDrawer />
           <MobileNav />
         </div>

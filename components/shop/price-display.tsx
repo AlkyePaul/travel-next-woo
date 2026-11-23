@@ -1,4 +1,5 @@
 import { formatPrice, calculateDiscountPercentage } from "@/lib/woocommerce";
+import { useLocale, useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -19,6 +20,8 @@ export function PriceDisplay({
   size = "md",
   showBadge = true,
 }: PriceDisplayProps) {
+  const t = useTranslations("Product");
+  const locale = useLocale();
   const discountPercentage = onSale
     ? calculateDiscountPercentage(regularPrice, salePrice)
     : 0;
@@ -41,7 +44,7 @@ export function PriceDisplay({
   if (!price && !regularPrice) {
     return (
       <span className={cn("font-semibold", sizeClasses[size].price)}>
-        Price on request
+        {t("priceOnRequest")}
       </span>
     );
   }
@@ -52,11 +55,11 @@ export function PriceDisplay({
         <>
           <span
             className={cn(
-              "font-bold text-destructive",
+              "font-display font-semibold lining-nums text-primary",
               sizeClasses[size].price
             )}
           >
-            {formatPrice(salePrice)}
+            {formatPrice(salePrice, { locale })}
           </span>
           <span
             className={cn(
@@ -64,15 +67,17 @@ export function PriceDisplay({
               sizeClasses[size].original
             )}
           >
-            {formatPrice(regularPrice)}
+            {formatPrice(regularPrice, { locale })}
           </span>
           {showBadge && discountPercentage > 0 && (
-            <Badge variant="destructive">Save {discountPercentage}%</Badge>
+            <Badge variant="destructive">
+              {t("save", { percent: discountPercentage })}
+            </Badge>
           )}
         </>
       ) : (
-        <span className={cn("font-bold", sizeClasses[size].price)}>
-          {formatPrice(price || regularPrice)}
+        <span className={cn("font-display font-semibold lining-nums", sizeClasses[size].price)}>
+          {formatPrice(price || regularPrice, { locale })}
         </span>
       )}
     </div>

@@ -108,7 +108,7 @@ export function VariationSelector({
                         "px-4 py-2 text-sm border rounded-md transition-all",
                         isSelected
                           ? "border-primary bg-primary text-primary-foreground"
-                          : "border-input bg-background hover:bg-accent",
+                          : "border-input bg-background hover:bg-muted",
                         !isAvailable && "opacity-50 cursor-not-allowed line-through"
                       )}
                     >

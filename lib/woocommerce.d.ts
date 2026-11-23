@@ -84,7 +84,7 @@ export interface Product {
   date_created_gmt: string;
   date_modified: string;
   date_modified_gmt: string;
-  type: "simple" | "grouped" | "external" | "variable";
+  type: "simple" | "grouped" | "external" | "variable" | "tour";
   status: "draft" | "pending" | "private" | "publish";
   featured: boolean;
   catalog_visibility: "visible" | "catalog" | "search" | "hidden";
@@ -142,7 +142,23 @@ export interface Product {
   price_html: string;
   related_ids: number[];
   meta_data: ProductMetaData[];
+  /** Translations from the Next i18n WordPress plugin, keyed by locale (absent if the plugin is off) */
+  i18n?: ContentTranslations;
+  /** Tour data from the Next Tours WordPress plugin (null for other product types) */
+  tour?: Tour | null;
 }
+
+/** One locale's translation, as exposed by the Next i18n plugin (HTML already rendered). */
+export interface ContentTranslation {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  /** The Italian source changed after this translation was made */
+  outdated: boolean;
+}
+
+export type ContentTranslations = Partial<Record<string, ContentTranslation>>;
 
 // Product Variation
 export interface ProductVariation {
@@ -207,26 +223,47 @@ export interface ProductReview {
 
 // Cart Types (Client-side)
 export interface CartItem {
+  /** Store API cart item key (set once the item is in the WooCommerce cart) */
+  key?: string;
   productId: number;
   variationId?: number;
   quantity: number;
+  /** Limits enforced by WooCommerce (stock, sold individually, plugins) */
+  quantityLimits?: { min: number; max: number; step: number; editable: boolean };
   name: string;
+  /** Product slug in the current locale, for links */
+  slug?: string;
+  /** Unit price, decimal string ("100.00") */
   price: string;
+  /** Line total after discounts, decimal string */
+  lineTotal?: string;
   image?: string;
   attributes?: ProductDefaultAttribute[];
+  /** WooCommerce "Sold individually": at most 1 per cart line */
+  soldIndividually?: boolean;
+  /** Tour booking carried by this line (date, participants, extras) */
+  booking?: CartBooking;
 }
 
 export interface CartTotals {
   subtotal: string;
+  discount?: string;
   shipping: string;
   tax: string;
   total: string;
   itemCount: number;
+  /** ISO currency code from WooCommerce ("EUR") */
+  currency?: string;
 }
 
 export interface Cart {
   items: CartItem[];
   totals: CartTotals;
+  coupons?: { code: string; discount: string }[];
+  /** Problems WooCommerce found in the cart (out of stock, etc.) */
+  errors?: { code: string; message: string }[];
+  needsPayment?: boolean;
+  needsShipping?: boolean;
 }
 
 // Order Types
@@ -333,7 +370,9 @@ export type OrderStatus =
   | "cancelled"
   | "refunded"
   | "failed"
-  | "trash";
+  | "trash"
+  /** Next Tours: booking request waiting for manual confirmation (no payment yet) */
+  | "tour-request";
 
 export interface Order {
   id: number;
@@ -571,6 +610,8 @@ export interface CreateOrderInput {
     product_id: number;
     variation_id?: number;
     quantity: number;
+    /** Tour lines carry `_next_tour_request` (JSON booking request, re-validated by WordPress) */
+    meta_data?: Array<{ key: string; value: string }>;
   }>;
   shipping_lines?: Array<{
     method_id: string;
@@ -583,4 +624,211 @@ export interface CreateOrderInput {
   customer_id?: number;
   customer_note?: string;
   meta_data?: ProductMetaData[];
+}
+
+// ============================================================================
+// Tours (Next Tours WordPress plugin)
+// ============================================================================
+
+export type TourKind = "experience" | "day_tour" | "multi_day";
+export type TourPricingModel =
+  | "per_person"
+  | "person_types"
+  | "group_tiers"
+  | "private_group"
+  | "per_unit"
+  | "quote";
+export type TourMeal = "breakfast" | "lunch" | "dinner";
+export type TourExtraPer = "booking" | "person" | "day" | "unit";
+
+export interface TourItineraryStop {
+  title: string;
+  /** HTML */
+  description: string;
+  meals: TourMeal[];
+  accommodation: string;
+}
+
+export interface TourPersonType {
+  /** Standard keys (adult, child, infant, youth, senior, student) are translated by the storefront */
+  key: string;
+  label: string;
+  price: string;
+  min_age: number;
+  max_age: number;
+  min: number;
+  max: number;
+  /** false = doesn't take a seat (e.g. infants) */
+  counts_capacity: boolean;
+}
+
+export interface TourExtra {
+  key: string;
+  label: string;
+  price: string;
+  per: TourExtraPer;
+  required: boolean;
+}
+
+/** One locale's translation of the tour texts (untranslated entries already fall back to Italian). */
+export interface TourTranslation {
+  highlights: string[];
+  included: string[];
+  not_included: string[];
+  what_to_bring: string[];
+  languages: string[];
+  itinerary: { title: string; description: string; accommodation: string }[];
+  important_info: string;
+  cancellation_policy: string;
+  meeting_point_notes: string;
+  person_types: Record<string, string>;
+  extras: Record<string, string>;
+  unit_label: string;
+  outdated: boolean;
+}
+
+export interface Tour {
+  kind: TourKind;
+  duration: { value: number; unit: "minutes" | "hours" | "days" };
+  nights: number;
+  /** Length in days (1 for anything shorter than a day) */
+  days: number;
+  difficulty: "" | "easy" | "moderate" | "challenging";
+  min_age: number;
+  group_size: { min: number; max: number };
+  languages: string[];
+  meeting_point: { address: string; notes: string; lat: string; lng: string };
+  end_point: { address: string };
+  highlights: string[];
+  itinerary: TourItineraryStop[];
+  included: string[];
+  not_included: string[];
+  what_to_bring: string[];
+  important_info: string;
+  cancellation_policy: string;
+  booking: {
+    fixed_departures: boolean;
+    open_dates: boolean;
+    /** Product-level default; single departures can override it */
+    confirmation: "instant" | "on_request";
+    cutoff_hours: number;
+    booking_window_days: number;
+    min_per_booking: number;
+    /** 0 = no limit */
+    max_per_booking: number;
+    next_departure: { date: string; time: string } | null;
+  };
+  pricing: {
+    model: TourPricingModel;
+    /** Lowest advertised price ("" = on request) */
+    from_price: string;
+    currency: string;
+    price: string;
+    person_types: TourPersonType[];
+    tiers: { min: number; max: number; price: string }[];
+    group: { price: string; included: number; extra_price: string; max_people: number };
+    unit: { label: string; price: string; capacity: number; max_units: number };
+    extras: TourExtra[];
+  };
+  i18n?: Partial<Record<string, TourTranslation>>;
+}
+
+export interface TourDeparture {
+  id: string;
+  date: string;
+  time: string;
+  end_date: string;
+  capacity: number | null;
+  /** null = unlimited */
+  remaining: number | null;
+  status: "open" | "closed";
+  bookable: boolean;
+  on_request: boolean;
+  guaranteed: boolean;
+  /** Percentage applied to the base price */
+  price_adjustment: number;
+  note: string;
+}
+
+export interface TourDateSlot {
+  /** "" = all day */
+  time: string;
+  capacity: number | null;
+  remaining: number | null;
+  bookable: boolean;
+}
+
+export interface TourOpenDate {
+  date: string;
+  end_date: string;
+  on_request: boolean;
+  price_adjustment: number;
+  slots: TourDateSlot[];
+}
+
+export interface TourAvailability {
+  product_id: number;
+  fixed_departures: boolean;
+  open_dates: boolean;
+  from: string;
+  to: string;
+  departures: TourDeparture[];
+  dates: TourOpenDate[];
+}
+
+/** What the storefront sends to price / book a tour. */
+export interface TourBookingRequest {
+  product_id: number;
+  mode: "departure" | "date" | "";
+  departure_id?: string;
+  date?: string;
+  time?: string;
+  /** { adult: 2, child: 1 } for person types, { people: 3 } otherwise */
+  participants: Record<string, number>;
+  units?: number;
+  extras: string[];
+}
+
+export interface TourQuoteError {
+  code: string;
+  message: string;
+  data?: Record<string, unknown>;
+}
+
+export interface TourQuote {
+  /** Complete and bookable (a date is chosen and everything checks out) */
+  valid: boolean;
+  errors: TourQuoteError[];
+  currency: string;
+  model: TourPricingModel;
+  on_request: boolean;
+  price_on_request: boolean;
+  people: number;
+  seats: number;
+  units: number;
+  participants: { key: string; label: string; count: number }[];
+  extras: { key: string; label: string; qty: number; price: string; total: string; required: boolean }[];
+  lines: { type: "base" | "adjustment" | "extra"; label: string; qty: number; unit_price: string; total: string }[];
+  subtotal: string;
+  adjustment: string;
+  extras_total: string;
+  total: string;
+}
+
+/** Booking stored on a cart line (from the Store API extension). */
+export interface CartBooking {
+  mode: "departure" | "date";
+  departureId: string;
+  date: string;
+  time: string;
+  endDate: string;
+  onRequest: boolean;
+  model: TourPricingModel;
+  people: number;
+  units: number;
+  participants: { key: string; label: string; count: number }[];
+  extras: { key: string; label: string; qty: number }[];
+  total: string;
+  /** The request it was priced from, sent again with the order */
+  request: TourBookingRequest;
 }

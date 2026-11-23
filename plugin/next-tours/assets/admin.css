@@ -1,0 +1,143 @@
+/* Next Tours – product edit screen */
+.next-tours-panel .next-tours-section {
+  padding: 0 12px 12px;
+}
+.next-tours-panel h4 {
+  margin: 14px 0 6px;
+}
+.next-tours-help {
+  color: #646970;
+  font-style: italic;
+  margin: 6px 0 !important;
+  padding: 0 !important;
+}
+.next-tours-panel .options_group > .next-tours-help {
+  padding: 0 12px !important;
+}
+.next-tours-inline input.short,
+.next-tours-inline select {
+  width: auto !important;
+  max-width: 120px;
+  float: none !important;
+}
+.next-tours-table {
+  margin: 6px 0;
+}
+.next-tours-table th,
+.next-tours-table td {
+  padding: 4px 6px !important;
+  vertical-align: middle;
+}
+.next-tours-table input[type='text'],
+.next-tours-table input[type='date'],
+.next-tours-table input[type='time'],
+.next-tours-table select {
+  width: 100%;
+  min-width: 0;
+  float: none !important;
+}
+.next-tours-table input.next-tours-xs {
+  width: 64px;
+}
+.next-tours-table input.next-tours-sm {
+  width: 90px;
+}
+.next-tours-center,
+.next-tours-booked {
+  text-align: center;
+}
+.next-tours-weekdays {
+  white-space: nowrap;
+}
+.next-tours-weekdays label {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+  margin-right: 2px;
+}
+.next-tours-weekdays input {
+  margin: 0 !important;
+}
+.next-tours-remove {
+  color: #b32d2e !important;
+  font-size: 18px;
+  line-height: 1;
+  text-decoration: none;
+}
+.next-tours-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0;
+}
+.next-tours-card {
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  padding: 8px;
+  background: #fff;
+}
+.next-tours-card-head,
+.next-tours-card-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.next-tours-card textarea {
+  width: 100%;
+  margin: 6px 0;
+}
+.next-tours-grow {
+  flex: 1;
+}
+.next-tours-handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  background: #f0f0f1;
+  font-weight: 600;
+  font-size: 12px;
+}
+.next-tours-disabled {
+  opacity: 0.55;
+}
+.next-tours-translations {
+  padding: 0 12px 12px;
+}
+.next-tours-translations ul {
+  margin: 6px 0;
+}
+.next-tours-badge {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  background: #f0f0f1;
+}
+.next-tours-badge.is-ok {
+  background: #d1e7dd;
+}
+.next-tours-badge.is-stale {
+  background: #fff3cd;
+}
+/* Order screen */
+.next-tours-order-box table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+}
+.next-tours-order-box td {
+  padding: 3px 0;
+  vertical-align: top;
+}
+.next-tours-order-box textarea {
+  width: 100%;
+}
+.next-tours-order-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}

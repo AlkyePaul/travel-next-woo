@@ -1,6 +1,6 @@
 import { Section, Container, Prose } from "@/components/craft";
 import BackButton from "@/components/back";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 interface ArchiveItem {
   id: number;

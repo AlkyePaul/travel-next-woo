@@ -2,22 +2,27 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import type { ProductImage } from "@/lib/woocommerce.d";
 import { cn } from "@/lib/utils";
+import { ProductImageFallback } from "./product-image-fallback";
 
 interface ProductGalleryProps {
   images: ProductImage[];
   productName: string;
+  /** Picks the colour of the stand-in panel when there are no images */
+  categorySlugs?: string[];
 }
 
-export function ProductGallery({ images, productName }: ProductGalleryProps) {
+export function ProductGallery({ images, productName, categorySlugs = [] }: ProductGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const t = useTranslations("Product");
 
   if (!images || images.length === 0) {
     return (
-      <div className="aspect-square bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
-        No image available
+      <div className="aspect-[4/3] overflow-hidden rounded-lg">
+        <ProductImageFallback categorySlugs={categorySlugs} />
       </div>
     );
   }
@@ -54,7 +59,10 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
             >
               <Image
                 src={image.src}
-                alt={image.alt || `${productName} thumbnail ${index + 1}`}
+                alt={
+                  image.alt ||
+                  t("thumbnailAlt", { name: productName, index: index + 1 })
+                }
                 fill
                 className="object-cover"
                 sizes="80px"
