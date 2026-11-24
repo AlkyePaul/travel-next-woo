@@ -24,6 +24,38 @@ export interface ProductCategory {
   image: ProductImage | null;
   menu_order: number;
   count: number;
+  /** Destination page content (Next Tours), only on country categories under "destinazioni". */
+  destination?: DestinationContent | null;
+}
+
+// Destination page content of a country category (Next Tours, term meta _next_destination)
+export interface DestinationImage {
+  id: number;
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption: string;
+}
+
+export interface DestinationZone {
+  name: string;
+  text: string;
+  /** Decimal degrees as strings; "" when not set. */
+  lat: string;
+  lng: string;
+}
+
+export interface DestinationContent {
+  subtitle: string;
+  /** HTML (sanitized by WordPress). */
+  intro: string;
+  gallery: DestinationImage[];
+  zones: DestinationZone[];
+  grapes: string[];
+  /** 1 = January … 12 = December. */
+  best_months: number[];
+  getting_there: string;
 }
 
 // Product Tag

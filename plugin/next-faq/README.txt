@@ -26,8 +26,13 @@ Una FAQ può stare in entrambi. Senza elenco non compare da nessuna parte
 == Traduzioni ==
 
 Con Next i18n attivo, le FAQ hanno il box "Traduzioni" (titolo = domanda,
-contenuto = risposta) con il pulsante DeepL. Le lingue senza traduzione
-mostrano l'italiano.
+contenuto = risposta) con il pulsante DeepL; con la traduzione automatica
+attiva (Impostazioni > Next i18n) le FAQ pubblicate vengono tradotte in
+background come prodotti e pagine. Le lingue senza traduzione mostrano
+l'italiano.
+
+La risposta viene salvata con paragrafi <p> espliciti: DeepL ignora gli a capo
+e senza i <p> le traduzioni unirebbero i paragrafi.
 
 == Rivalidazione ==
 

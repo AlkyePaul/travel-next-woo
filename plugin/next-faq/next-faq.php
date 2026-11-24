@@ -51,6 +51,7 @@ class Next_FAQ {
         add_action('init', array(__CLASS__, 'register'));
         add_action('init', array(__CLASS__, 'ensure_lists'), 20);
         add_action('rest_api_init', array(__CLASS__, 'register_rest'));
+        add_filter('wp_insert_post_data', array(__CLASS__, 'explicit_paragraphs'), 10, 2);
 
         // Box traduzioni di Next i18n anche sulle FAQ
         add_filter('next_i18n_post_types', array(__CLASS__, 'add_i18n_post_type'));
@@ -130,6 +131,21 @@ class Next_FAQ {
             }
         }
         update_option('next_faq_lists_version', NEXT_FAQ_VERSION, false);
+    }
+
+    /**
+     * Risposta salvata con <p> espliciti: DeepL (tag_handling html) ignora gli a capo,
+     * quindi senza questi le traduzioni di Next i18n unirebbero i paragrafi.
+     */
+    public static function explicit_paragraphs($data, $postarr) {
+        if ($data['post_type'] !== self::POST_TYPE || trim($data['post_content']) === '') {
+            return $data;
+        }
+        $content = wp_unslash($data['post_content']);
+        if (!preg_match('/<p[\s>]/i', $content)) {
+            $data['post_content'] = wp_slash(trim(wpautop($content)));
+        }
+        return $data;
     }
 
     public static function add_i18n_post_type($types) {

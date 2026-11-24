@@ -10,7 +10,11 @@ import {
   getAllCategorySlugs,
 } from "@/lib/woocommerce";
 
+import type { DestinationContent, ProductCategory } from "@/lib/woocommerce.d";
 import { localizeProducts } from "@/lib/i18n-content";
+import { DestinationGallery } from "@/components/destinations/destination-gallery";
+import { DestinationTerritory } from "@/components/destinations/destination-territory";
+import { OtherDestinations } from "@/components/destinations/other-destinations";
 import { Section, Container, Prose } from "@/components/craft";
 import { ProductGrid } from "@/components/shop";
 import {
@@ -21,6 +25,26 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+
+const emptyDestination: DestinationContent = {
+  subtitle: "",
+  intro: "",
+  gallery: [],
+  zones: [],
+  grapes: [],
+  best_months: [],
+  getting_there: "",
+};
+
+/**
+ * Destination content of a country category (slug = country code under "destinazioni"),
+ * null for other categories. Without the Next Tours field yet, country slugs still get
+ * the destination layout, just without content.
+ */
+function destinationOf(category: ProductCategory): DestinationContent | null {
+  if (category.destination !== undefined) return category.destination;
+  return /^[a-z]{2}$/.test(category.slug) ? emptyDestination : null;
+}
 
 interface CategoryPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -50,7 +74,9 @@ export async function generateMetadata({
   return {
     title: category.name,
     description:
-      category.description || t("categoryDescription", { name: category.name }),
+      category.description ||
+      category.destination?.subtitle ||
+      t("categoryDescription", { name: category.name }),
   };
 }
 
@@ -61,10 +87,11 @@ export default async function CategoryPage({
   const { locale, slug } = await params;
   setRequestLocale(locale as Locale);
   const { page: pageParam } = await searchParams;
-  const [t, tNav, tc] = await Promise.all([
+  const [t, tNav, tc, td] = await Promise.all([
     getTranslations("Shop"),
     getTranslations("Nav"),
     getTranslations("Common"),
+    getTranslations("Destination"),
   ]);
 
   const category = await getProductCategoryBySlug(slug);
@@ -73,6 +100,7 @@ export default async function CategoryPage({
     notFound();
   }
 
+  const destination = destinationOf(category);
   const page = pageParam ? parseInt(pageParam, 10) : 1;
   const productsPerPage = 12;
 
@@ -103,25 +131,42 @@ export default async function CategoryPage({
             <span className="text-foreground">{category.name}</span>
           </nav>
 
-          <Prose>
-            <h1>{category.name}</h1>
-            <p className="text-muted-foreground">
-              {t("productCount", { count: total })}
-            </p>
-          </Prose>
+          {destination ? (
+            // Destination: no hero, the experiences come first
+            <header className="max-w-3xl">
+              <h1 className="text-4xl md:text-5xl">{category.name}</h1>
+              {destination.subtitle && (
+                <p className="mt-3 font-display text-xl italic text-accent md:text-2xl">
+                  {destination.subtitle}
+                </p>
+              )}
+              <p className="mt-3 text-muted-foreground">
+                {total > 0 ? t("productCount", { count: total }) : td("noExperiences")}
+              </p>
+            </header>
+          ) : (
+            <>
+              <Prose>
+                <h1>{category.name}</h1>
+                <p className="text-muted-foreground">
+                  {t("productCount", { count: total })}
+                </p>
+              </Prose>
 
-          {/* Category Image */}
-          {category.image && (
-            <div className="w-full h-48 rounded-lg overflow-hidden bg-muted">
-              <img
-                src={category.image.src}
-                alt={category.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
+              {/* Category Image */}
+              {category.image && (
+                <div className="w-full h-48 rounded-lg overflow-hidden bg-muted">
+                  <img
+                    src={category.image.src}
+                    alt={category.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+            </>
           )}
 
-          <ProductGrid products={products} columns={4} />
+          <ProductGrid products={products} columns={destination ? 3 : 4} />
 
           {totalPages > 1 && (
             <div className="flex justify-center items-center py-8">
@@ -175,6 +220,18 @@ export default async function CategoryPage({
                 </PaginationContent>
               </Pagination>
             </div>
+          )}
+
+          {destination && (
+            <>
+              <DestinationGallery
+                images={destination.gallery}
+                title={td("gallery")}
+                name={category.name}
+              />
+              <DestinationTerritory code={category.slug} destination={destination} />
+              <OtherDestinations current={category.slug} />
+            </>
           )}
         </div>
       </Container>

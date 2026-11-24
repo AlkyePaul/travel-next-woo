@@ -75,7 +75,17 @@ function DotMap({
  * and a legend of plain links. Counts come from the WooCommerce destination
  * categories; the dots are rendered here, so the map data never reaches the client bundle.
  */
-export async function WineMap({ className }: { className?: string }) {
+export async function WineMap({
+  className,
+  mapClassName,
+  legendClassName,
+  lensMode,
+}: {
+  className?: string;
+  mapClassName?: string;
+  legendClassName?: string;
+  lensMode?: "zoom" | "fixed";
+}) {
   const [t, locale, destinations] = await Promise.all([
     getTranslations("WineMap"),
     getLocale(),
@@ -124,6 +134,9 @@ export async function WineMap({ className }: { className?: string }) {
   return (
     <WineMapInteractive
       className={className}
+      mapClassName={mapClassName}
+      legendClassName={legendClassName}
+      lensMode={lensMode}
       countries={countries}
       groups={mapGroups.map((id) => ({ id, label: t(`groups.${id}`) }))}
       aspectRatio={WORLD.cols / WORLD.rows}

@@ -388,5 +388,15 @@
   "Faq": {
     "title": "Domande frequenti",
     "homeIntro": "Tutto quello che c'è da sapere prima di partire: prenotazioni, degustazioni, trasferimenti e cancellazioni."
+  },
+  "Destination": {
+    "gallery": "Immagini",
+    "territory": "Il territorio",
+    "zones": "Le zone del vino",
+    "grapes": "Vitigni principali",
+    "bestTime": "Quando andare",
+    "gettingThere": "Come arrivare",
+    "others": "Altre destinazioni",
+    "noExperiences": "Stiamo preparando le prime esperienze in questo paese."
   }
 }

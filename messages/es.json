@@ -1,19 +1,19 @@
 {
   "Metadata": {
-    "description": "Metadata.description"
+    "description": "Catas en bodega, tours por los viñedos y viajes del vino por Italia. Elige la fecha y reserva online."
   },
   "Nav": {
     "home": "Inicio",
-    "shop": "Nav.shop",
+    "shop": "Experiencias",
     "blog": "Blog",
     "categories": "Categorías",
     "tags": "Etiquetas",
     "authors": "Autores",
     "menu": "Menú",
     "blogMenu": "Menú del blog",
-    "toggleMenu": "Nav.toggleMenu",
-    "website": "Nav.website",
-    "cart": "Nav.cart"
+    "toggleMenu": "Abrir el menú",
+    "website": "El sitio",
+    "cart": "Carrito"
   },
   "LocaleSwitcher": {
     "label": "Idioma",
@@ -21,18 +21,18 @@
   },
   "Footer": {
     "rights": "Todos los derechos reservados.",
-    "experiences": "Footer.experiences"
+    "experiences": "Experiencias"
   },
   "NotFound": {
-    "title": "NotFound.title",
-    "description": "NotFound.description",
+    "title": "Página no encontrada",
+    "description": "Puede que la dirección haya cambiado o que ya no exista. Vuelve al inicio o explora las experiencias.",
     "backHome": "Volver al inicio",
-    "browse": "NotFound.browse"
+    "browse": "Explorar las experiencias"
   },
   "Common": {
     "loading": "Cargando...",
     "noImageAvailable": "Sin imagen disponible",
-    "continueShopping": "Common.continueShopping",
+    "continueShopping": "Descubre las experiencias",
     "goBack": "Volver",
     "toggleTheme": "Cambiar tema",
     "close": "Cerrar",
@@ -47,66 +47,66 @@
   },
   "Home": {
     "hero": {
-      "title": "Home.hero.title",
-      "intro": "Home.hero.intro",
-      "regions": "Home.hero.regions",
-      "cta": "Home.hero.cta"
+      "title": "El vino se entiende donde nace",
+      "intro": "Catas en bodega, jornadas entre viñedos y viajes de varios días por las tierras del vino italiano. Elige la fecha y reserva online.",
+      "regions": "Langhe, Valpolicella, Chianti Classico, colinas del Prosecco, Franciacorta y Etna",
+      "cta": "Descubre las experiencias"
     },
     "durations": {
-      "title": "Home.durations.title",
-      "intro": "Home.durations.intro"
+      "title": "¿Cuánto tiempo tienes?",
+      "intro": "De una cata de tarde a un viaje de una semana: elige según el tiempo que quieras dedicar al vino."
     },
     "featured": {
-      "title": "Home.featured.title",
-      "all": "Home.featured.all"
+      "title": "Experiencias para reservar",
+      "all": "Todas las experiencias"
     },
     "booking": {
-      "title": "Home.booking.title",
+      "title": "Cómo se reserva",
       "steps": {
         "choose": {
-          "title": "Home.booking.steps.choose.title",
-          "description": "Home.booking.steps.choose.description"
+          "title": "Elige fecha y participantes",
+          "description": "Cada experiencia muestra las fechas disponibles y calcula el precio para tu grupo antes de reservar."
         },
         "confirm": {
-          "title": "Home.booking.steps.confirm.title",
-          "description": "Home.booking.steps.confirm.description"
+          "title": "Confirmación inmediata o bajo petición",
+          "description": "Muchas experiencias se confirman al instante. En las demás, comprobamos la disponibilidad con la bodega y te respondemos por email."
         },
         "pay": {
-          "title": "Home.booking.steps.pay.title",
-          "description": "Home.booking.steps.pay.description"
+          "title": "Pagas online",
+          "description": "Con la confirmación inmediata pagas en el momento. En las solicitudes no pagas nada hasta que confirmemos: te enviamos nosotros el enlace de pago."
         }
       }
     },
     "map": {
-      "title": "Home.map.title",
-      "intro": "Home.map.intro"
+      "title": "Las tierras del vino en el mundo",
+      "intro": "Elige un país: el número indica las experiencias programadas. Las demás grandes tierras del vino ya están en el mapa, a la espera de los próximos viajes."
     }
   },
   "Experiences": {
     "hours": {
-      "duration": "Experiences.hours.duration",
-      "title": "Experiences.hours.title",
-      "description": "Experiences.hours.description",
-      "link": "Experiences.hours.link"
+      "duration": "Unas horas",
+      "title": "Experiencias en bodega",
+      "description": "Catas guiadas, masterclasses y vendimias en familia, con quienes hacen vino cada día.",
+      "link": "Ver las experiencias en bodega"
     },
     "day": {
-      "duration": "Experiences.day.duration",
-      "title": "Experiences.day.title",
-      "description": "Experiences.day.description",
-      "link": "Experiences.day.link"
+      "duration": "Un día",
+      "title": "Tours por los viñedos",
+      "description": "En e-bike, en Vespa o con conductor privado: varias bodegas en un día, con almuerzo y catas por el camino.",
+      "link": "Ver los tours por los viñedos"
     },
     "days": {
-      "duration": "Experiences.days.duration",
-      "title": "Experiences.days.title",
-      "description": "Experiences.days.description",
-      "link": "Experiences.days.link"
+      "duration": "Varios días",
+      "title": "Viajes del vino",
+      "description": "Fines de semana e itinerarios con noche entre viñedos, en grupos reducidos con fechas fijas o a medida.",
+      "link": "Ver los viajes del vino"
     }
   },
   "Cart": {
     "title": "Carrito de compra",
     "loading": "Cargando carrito...",
     "empty": "Tu carrito está vacío",
-    "emptyDescription": "Cart.emptyDescription",
+    "emptyDescription": "Todavía no has añadido ninguna experiencia. Elige una fecha y reserva en pocos pasos.",
     "clear": "Vaciar carrito",
     "remove": "Eliminar",
     "orderSummary": "Resumen del pedido",
@@ -118,7 +118,7 @@
   },
   "Checkout": {
     "title": "Checkout",
-    "emptyDescription": "Checkout.emptyDescription",
+    "emptyDescription": "Añade una experiencia al carrito para continuar con la reserva.",
     "billingDetails": "Datos de facturación",
     "firstName": "Nombre *",
     "lastName": "Apellidos *",
@@ -151,58 +151,58 @@
     "requestNote": "Una o más reservas necesitan nuestra confirmación: ahora no pagas nada. Recibirás un correo con el enlace de pago en cuanto confirmemos."
   },
   "CheckoutSuccess": {
-    "title": "CheckoutSuccess.title",
-    "description": "CheckoutSuccess.description",
+    "title": "Gracias por tu reserva",
+    "description": "Hemos recibido tu pedido: en breve recibirás un email de confirmación con todos los detalles.",
     "orderNumber": "Número de pedido",
     "viewOrder": "Ver pedido",
     "loading": "Cargando detalles del pedido...",
-    "requestTitle": "CheckoutSuccess.requestTitle",
+    "requestTitle": "Solicitud enviada",
     "requestDescription": "Hemos recibido tu solicitud de reserva. Comprobamos la disponibilidad y te respondemos lo antes posible: si se confirma, recibirás un correo con el enlace de pago.",
     "requestNumber": "Número de solicitud"
   },
   "Shop": {
-    "title": "Shop.title",
-    "metaDescription": "Shop.metaDescription",
-    "productsFound": "Shop.productsFound",
+    "title": "Experiencias",
+    "metaDescription": "Catas en bodega, tours por los viñedos y viajes del vino por Italia: elige tu experiencia y reserva online.",
+    "productsFound": "{count, plural, =0 {Ninguna experiencia} one {# experiencia} other {# experiencias}}",
     "matching": "para “{search}”",
-    "productCount": "Shop.productCount",
+    "productCount": "{count, plural, =0 {Ninguna experiencia} one {# experiencia} other {# experiencias}}",
     "categoryNotFound": "Categoría no encontrada",
-    "categoryDescription": "Shop.categoryDescription",
-    "intro": "Shop.intro",
-    "empty": "Shop.empty"
+    "categoryDescription": "Experiencias: {name}",
+    "intro": "Catas, jornadas entre viñedos y viajes de varios días. Filtra por tipo de experiencia o busca una zona del vino.",
+    "empty": "Ninguna experiencia coincide con la búsqueda. Prueba a quitar algún filtro."
   },
   "Filters": {
     "search": "Buscar",
-    "searchPlaceholder": "Filters.searchPlaceholder",
+    "searchPlaceholder": "Busca por nombre, zona o vino…",
     "category": "Categoría",
     "allCategories": "Todas las categorías",
     "tag": "Etiqueta",
     "allTags": "Todas las etiquetas",
     "sortBy": "Ordenar por",
     "sort": {
-      "default": "Filters.sort.default",
-      "popularity": "Filters.sort.popularity",
-      "rating": "Filters.sort.rating",
-      "date": "Filters.sort.date",
-      "price": "Filters.sort.price",
-      "priceDesc": "Filters.sort.priceDesc"
+      "default": "Recomendadas",
+      "popularity": "Más reservadas",
+      "rating": "Mejor valoradas",
+      "date": "Novedades",
+      "price": "Precio ascendente",
+      "priceDesc": "Precio descendente"
     },
     "priceRange": "Rango de precios",
     "min": "Mín.",
     "max": "Máx.",
     "clear": "Borrar filtros",
-    "open": "Filters.open",
-    "showResults": "Filters.showResults"
+    "open": "Filtros",
+    "showResults": "Mostrar resultados"
   },
   "Product": {
-    "notFound": "Product.notFound",
+    "notFound": "Experiencia no encontrada",
     "reviewCount": "({count, plural, one {# reseña} other {# reseñas}})",
     "sku": "SKU:",
     "tags": "Etiquetas:",
     "description": "Descripción",
     "reviews": "Reseñas ({count})",
     "verified": "Verificado",
-    "related": "Product.related",
+    "related": "Te puede interesar",
     "featured": "Destacado",
     "priceOnRequest": "Precio a consultar",
     "save": "Ahorra un {percent}%",
@@ -222,7 +222,7 @@
   "Posts": {
     "title": "Blog",
     "metaTitle": "Entradas del blog",
-    "metaDescription": "Posts.metaDescription",
+    "metaDescription": "Relatos de bodegas, variedades de uva y territorios del vino italiano.",
     "found": "{count, plural, one {# entrada encontrada} other {# entradas encontradas}}",
     "matchingSearch": "para tu búsqueda",
     "noPosts": "No se encontraron entradas",
@@ -368,25 +368,35 @@
     }
   },
   "WineMap": {
-    "legend": "WineMap.legend",
-    "cta": "WineMap.cta",
-    "experiences": "WineMap.experiences",
-    "comingSoon": "WineMap.comingSoon",
+    "legend": "Destinos",
+    "cta": "Ver las experiencias",
+    "experiences": "{count, plural, one {# experiencia} other {# experiencias}}",
+    "comingSoon": "Experiencias próximamente",
     "groups": {
-      "europe": "WineMap.groups.europe",
-      "americas": "WineMap.groups.americas",
-      "africa": "WineMap.groups.africa",
-      "asia": "WineMap.groups.asia",
-      "oceania": "WineMap.groups.oceania"
+      "europe": "Europa",
+      "americas": "América",
+      "africa": "África",
+      "asia": "Asia",
+      "oceania": "Oceanía"
     },
     "lens": {
-      "name": "WineMap.lens.name",
-      "open": "WineMap.lens.open",
-      "close": "WineMap.lens.close"
+      "name": "Europa",
+      "open": "Ampliar Europa",
+      "close": "Cerrar la lente"
     }
   },
   "Faq": {
-    "title": "Faq.title",
-    "homeIntro": "Faq.homeIntro"
+    "title": "Preguntas frecuentes",
+    "homeIntro": "Todo lo que hay que saber antes de partir: reservas, catas, traslados y cancelaciones."
+  },
+  "Destination": {
+    "gallery": "Imágenes",
+    "territory": "El territorio",
+    "zones": "Las zonas del vino",
+    "grapes": "Variedades principales",
+    "bestTime": "Cuándo ir",
+    "gettingThere": "Cómo llegar",
+    "others": "Otros destinos",
+    "noExperiences": "Estamos preparando las primeras experiencias en este país."
   }
 }

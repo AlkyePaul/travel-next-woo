@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Next Tours
  * Description: Prodotti "Tour" per la vetrina Next.js: esperienze, tour giornalieri e pacchetti multi-giorno con partenze fisse e/o date libere, conferma immediata o su richiesta, e modelli di prezzo flessibili.
- * Version: 0.1.0
+ * Version: 0.2.0
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * Requires Plugins: woocommerce
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('NEXT_TOURS_VERSION', '0.1.0');
+define('NEXT_TOURS_VERSION', '0.2.0');
 define('NEXT_TOURS_FILE', __FILE__);
 define('NEXT_TOURS_DIR', plugin_dir_path(__FILE__));
 define('NEXT_TOURS_URL', plugin_dir_url(__FILE__));
@@ -35,6 +35,7 @@ require_once NEXT_TOURS_DIR . 'includes/class-admin-orders.php';
 require_once NEXT_TOURS_DIR . 'includes/class-emails.php';
 require_once NEXT_TOURS_DIR . 'includes/class-translations.php';
 require_once NEXT_TOURS_DIR . 'includes/class-catalog.php';
+require_once NEXT_TOURS_DIR . 'includes/class-destinations.php';
 
 // Orders are only read/written through WooCommerce CRUD, so HPOS is supported.
 add_action('before_woocommerce_init', function () {
@@ -63,6 +64,7 @@ add_action('plugins_loaded', function () {
     Next_Tours_Emails::init();
     Next_Tours_Translations::init();
     Next_Tours_Catalog::init();
+    Next_Tours_Destinations::init();
     Next_Tours_Bookings::init();
 }, 20);
 

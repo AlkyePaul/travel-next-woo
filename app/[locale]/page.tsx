@@ -120,8 +120,9 @@ export default async function Home({
         </div>
       </section>
 
+      {/* Sections alternate background (card / page) from here on */}
       {/* Choose by time */}
-      <section className="py-16 md:py-24">
+      <section className="bg-card py-16 md:py-24">
         <Container className="py-0 sm:py-0">
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl">{t("durations.title")}</h2>
@@ -139,7 +140,7 @@ export default async function Home({
                 <span
                   aria-hidden
                   className={cn(
-                    "absolute left-0 top-0 -translate-y-1/2 rounded-full bg-primary ring-4 ring-background",
+                    "absolute left-0 top-0 -translate-y-1/2 rounded-full bg-primary ring-4 ring-card",
                     durationDots[i],
                   )}
                 />
@@ -162,15 +163,19 @@ export default async function Home({
         </Container>
       </section>
 
-      {/* Wine regions around the world */}
-      <section className="border-t py-16 md:py-24">
+      {/* Wine regions around the world: full-width map, then the country list */}
+      <section className="py-16 md:py-24">
         <Container className="py-0 sm:py-0">
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl">{t("map.title")}</h2>
             <p className="mt-4 text-lg text-muted-foreground">{t("map.intro")}</p>
           </div>
-          <WineMap className="mt-12" />
         </Container>
+        <WineMap
+          lensMode="zoom"
+          mapClassName="mt-10 md:mt-12"
+          legendClassName="mt-12 md:mt-16"
+        />
       </section>
 
       {/* Bookable experiences */}
@@ -190,8 +195,13 @@ export default async function Home({
         </section>
       )}
 
-      {/* How booking works */}
-      <section className="border-t py-16 md:py-24">
+      {/* How booking works (keeps the alternation when there are no experiences) */}
+      <section
+        className={cn(
+          "border-t py-16 md:py-24",
+          experiences.length === 0 && "bg-card",
+        )}
+      >
         <Container className="py-0 sm:py-0">
           <h2 className="text-4xl md:text-5xl">{t("booking.title")}</h2>
           <ol className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
@@ -219,7 +229,12 @@ export default async function Home({
 
       {/* FAQ (managed in WordPress, "Next FAQ" plugin, list "Home page") */}
       {faqs.length > 0 && (
-        <section className="border-t bg-card py-16 md:py-24">
+        <section
+          className={cn(
+            "border-t py-16 md:py-24",
+            experiences.length > 0 && "bg-card",
+          )}
+        >
           <Container className="grid gap-10 py-0 sm:py-0 md:grid-cols-3 md:gap-12">
             <div>
               <h2 className="text-4xl md:text-5xl">{tFaq("title")}</h2>

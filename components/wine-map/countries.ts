@@ -21,7 +21,8 @@ export const wineCountries: Record<string, { anchor?: [number, number]; group?: 
   DE: {},
   HU: { anchor: [47.6, 19.8] },
   GB: { anchor: [52.2, -1.2] },
-  GE: { group: "europe" },
+  // Asia
+  GE: { group: "asia" }, // outside the Western Europe lens: a spot on the world map
   // Americas
   US: { anchor: [41.5, -121.5] }, // West Coast: California, Oregon
   AR: { anchor: [-34.5, -65] },

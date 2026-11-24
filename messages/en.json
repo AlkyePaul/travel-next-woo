@@ -1,19 +1,19 @@
 {
   "Metadata": {
-    "description": "Metadata.description"
+    "description": "Winery tastings, vineyard tours and wine trips in Italy. Pick your date and book online."
   },
   "Nav": {
     "home": "Home",
-    "shop": "Nav.shop",
+    "shop": "Experiences",
     "blog": "Blog",
     "categories": "Categories",
     "tags": "Tags",
     "authors": "Authors",
     "menu": "Menu",
     "blogMenu": "Blog Menu",
-    "toggleMenu": "Nav.toggleMenu",
-    "website": "Nav.website",
-    "cart": "Nav.cart"
+    "toggleMenu": "Open menu",
+    "website": "Website",
+    "cart": "Cart"
   },
   "LocaleSwitcher": {
     "label": "Language",
@@ -21,18 +21,18 @@
   },
   "Footer": {
     "rights": "All rights reserved.",
-    "experiences": "Footer.experiences"
+    "experiences": "Experiences"
   },
   "NotFound": {
-    "title": "NotFound.title",
-    "description": "NotFound.description",
+    "title": "Page not found",
+    "description": "The address may have changed or no longer exists. Head back home or browse our experiences.",
     "backHome": "Return Home",
-    "browse": "NotFound.browse"
+    "browse": "Browse experiences"
   },
   "Common": {
     "loading": "Loading...",
     "noImageAvailable": "No image available",
-    "continueShopping": "Common.continueShopping",
+    "continueShopping": "Discover experiences",
     "goBack": "Go Back",
     "toggleTheme": "Toggle theme",
     "close": "Close",
@@ -47,66 +47,66 @@
   },
   "Home": {
     "hero": {
-      "title": "Home.hero.title",
-      "intro": "Home.hero.intro",
-      "regions": "Home.hero.regions",
-      "cta": "Home.hero.cta"
+      "title": "Wine is best understood where it's born",
+      "intro": "Winery tastings, days among the vines and multi-day trips through Italy's wine country. Pick your date and book online.",
+      "regions": "Langhe, Valpolicella, Chianti Classico, the Prosecco hills, Franciacorta and Etna",
+      "cta": "Discover experiences"
     },
     "durations": {
-      "title": "Home.durations.title",
-      "intro": "Home.durations.intro"
+      "title": "How much time do you have?",
+      "intro": "From an afternoon tasting to a week-long journey: choose based on how much time you want to give to wine."
     },
     "featured": {
-      "title": "Home.featured.title",
-      "all": "Home.featured.all"
+      "title": "Experiences to book",
+      "all": "All experiences"
     },
     "booking": {
-      "title": "Home.booking.title",
+      "title": "How booking works",
       "steps": {
         "choose": {
-          "title": "Home.booking.steps.choose.title",
-          "description": "Home.booking.steps.choose.description"
+          "title": "Choose date and guests",
+          "description": "Every experience shows its available dates and works out the price for your group before you book."
         },
         "confirm": {
-          "title": "Home.booking.steps.confirm.title",
-          "description": "Home.booking.steps.confirm.description"
+          "title": "Instant or on-request confirmation",
+          "description": "Many experiences are confirmed right away. For the others, we check availability with the winery and reply by email."
         },
         "pay": {
-          "title": "Home.booking.steps.pay.title",
-          "description": "Home.booking.steps.pay.description"
+          "title": "Pay online",
+          "description": "With instant confirmation you pay at booking. For requests you pay nothing until we confirm: we'll send you the payment link."
         }
       }
     },
     "map": {
-      "title": "Home.map.title",
-      "intro": "Home.map.intro"
+      "title": "The world's wine regions",
+      "intro": "Pick a country: the number shows the experiences on offer. The other great wine regions are already on the map, waiting for upcoming trips."
     }
   },
   "Experiences": {
     "hours": {
-      "duration": "Experiences.hours.duration",
-      "title": "Experiences.hours.title",
-      "description": "Experiences.hours.description",
-      "link": "Experiences.hours.link"
+      "duration": "A few hours",
+      "title": "Winery experiences",
+      "description": "Guided tastings, masterclasses and family harvests, with the people who make wine every day.",
+      "link": "See winery experiences"
     },
     "day": {
-      "duration": "Experiences.day.duration",
-      "title": "Experiences.day.title",
-      "description": "Experiences.day.description",
-      "link": "Experiences.day.link"
+      "duration": "A full day",
+      "title": "Vineyard tours",
+      "description": "By e-bike, Vespa or with a private driver: several wineries in one day, with lunch and tastings along the way.",
+      "link": "See vineyard tours"
     },
     "days": {
-      "duration": "Experiences.days.duration",
-      "title": "Experiences.days.title",
-      "description": "Experiences.days.description",
-      "link": "Experiences.days.link"
+      "duration": "Multi-day",
+      "title": "Wine trips",
+      "description": "Weekends and itineraries with overnight stays among the vines, in small groups on fixed dates or tailor-made.",
+      "link": "See wine trips"
     }
   },
   "Cart": {
     "title": "Shopping Cart",
     "loading": "Loading cart...",
     "empty": "Your cart is empty",
-    "emptyDescription": "Cart.emptyDescription",
+    "emptyDescription": "You haven't added any experiences yet. Pick a date and book in a few steps.",
     "clear": "Clear Cart",
     "remove": "Remove",
     "orderSummary": "Order Summary",
@@ -118,7 +118,7 @@
   },
   "Checkout": {
     "title": "Checkout",
-    "emptyDescription": "Checkout.emptyDescription",
+    "emptyDescription": "Add an experience to your cart to continue with your booking.",
     "billingDetails": "Billing Details",
     "firstName": "First Name *",
     "lastName": "Last Name *",
@@ -151,58 +151,58 @@
     "requestNote": "One or more bookings need our confirmation: you don’t pay anything now. You’ll get an email with the payment link as soon as we confirm."
   },
   "CheckoutSuccess": {
-    "title": "CheckoutSuccess.title",
-    "description": "CheckoutSuccess.description",
+    "title": "Thank you for your booking",
+    "description": "We've received your order: you'll shortly get a confirmation email with all the details.",
     "orderNumber": "Order Number",
     "viewOrder": "View Order",
     "loading": "Loading order details...",
-    "requestTitle": "CheckoutSuccess.requestTitle",
+    "requestTitle": "Request sent",
     "requestDescription": "We’ve received your booking request. We’ll check availability and get back to you as soon as possible: once confirmed, you’ll get an email with the payment link.",
     "requestNumber": "Request number"
   },
   "Shop": {
-    "title": "Shop.title",
-    "metaDescription": "Shop.metaDescription",
-    "productsFound": "Shop.productsFound",
+    "title": "Experiences",
+    "metaDescription": "Winery tastings, vineyard tours and wine trips in Italy: choose your experience and book online.",
+    "productsFound": "{count, plural, =0 {No experiences} one {# experience} other {# experiences}}",
     "matching": "matching “{search}”",
-    "productCount": "Shop.productCount",
+    "productCount": "{count, plural, =0 {No experiences} one {# experience} other {# experiences}}",
     "categoryNotFound": "Category Not Found",
-    "categoryDescription": "Shop.categoryDescription",
-    "intro": "Shop.intro",
-    "empty": "Shop.empty"
+    "categoryDescription": "Experiences: {name}",
+    "intro": "Tastings, days among the vineyards and multi-day trips. Filter by type of experience or search for a wine area.",
+    "empty": "No experiences match your search. Try removing some filters."
   },
   "Filters": {
     "search": "Search",
-    "searchPlaceholder": "Filters.searchPlaceholder",
+    "searchPlaceholder": "Search by name, area or wine…",
     "category": "Category",
     "allCategories": "All categories",
     "tag": "Tag",
     "allTags": "All tags",
     "sortBy": "Sort by",
     "sort": {
-      "default": "Filters.sort.default",
-      "popularity": "Filters.sort.popularity",
-      "rating": "Filters.sort.rating",
-      "date": "Filters.sort.date",
-      "price": "Filters.sort.price",
-      "priceDesc": "Filters.sort.priceDesc"
+      "default": "Recommended",
+      "popularity": "Most booked",
+      "rating": "Top rated",
+      "date": "Newest",
+      "price": "Price: low to high",
+      "priceDesc": "Price: high to low"
     },
     "priceRange": "Price Range",
     "min": "Min",
     "max": "Max",
     "clear": "Clear Filters",
-    "open": "Filters.open",
-    "showResults": "Filters.showResults"
+    "open": "Filters",
+    "showResults": "Show results"
   },
   "Product": {
-    "notFound": "Product.notFound",
+    "notFound": "Experience not found",
     "reviewCount": "({count, plural, one {# review} other {# reviews}})",
     "sku": "SKU:",
     "tags": "Tags:",
     "description": "Description",
     "reviews": "Reviews ({count})",
     "verified": "Verified",
-    "related": "Product.related",
+    "related": "You might also like",
     "featured": "Featured",
     "priceOnRequest": "Price on request",
     "save": "Save {percent}%",
@@ -222,7 +222,7 @@
   "Posts": {
     "title": "Blog",
     "metaTitle": "Blog Posts",
-    "metaDescription": "Posts.metaDescription",
+    "metaDescription": "Stories of wineries, grape varieties and Italian wine regions.",
     "found": "{count, plural, one {# post found} other {# posts found}}",
     "matchingSearch": "matching your search",
     "noPosts": "No posts found",
@@ -368,25 +368,35 @@
     }
   },
   "WineMap": {
-    "legend": "WineMap.legend",
-    "cta": "WineMap.cta",
-    "experiences": "WineMap.experiences",
-    "comingSoon": "WineMap.comingSoon",
+    "legend": "Destinations",
+    "cta": "See experiences",
+    "experiences": "{count, plural, one {# experience} other {# experiences}}",
+    "comingSoon": "Experiences coming soon",
     "groups": {
-      "europe": "WineMap.groups.europe",
-      "americas": "WineMap.groups.americas",
-      "africa": "WineMap.groups.africa",
-      "asia": "WineMap.groups.asia",
-      "oceania": "WineMap.groups.oceania"
+      "europe": "Europe",
+      "americas": "Americas",
+      "africa": "Africa",
+      "asia": "Asia",
+      "oceania": "Oceania"
     },
     "lens": {
-      "name": "WineMap.lens.name",
-      "open": "WineMap.lens.open",
-      "close": "WineMap.lens.close"
+      "name": "Europe",
+      "open": "Zoom in on Europe",
+      "close": "Close the lens"
     }
   },
   "Faq": {
-    "title": "Faq.title",
-    "homeIntro": "Faq.homeIntro"
+    "title": "Frequently asked questions",
+    "homeIntro": "Everything you need to know before you go: bookings, tastings, transfers and cancellations."
+  },
+  "Destination": {
+    "gallery": "Images",
+    "territory": "The territory",
+    "zones": "Wine areas",
+    "grapes": "Main grape varieties",
+    "bestTime": "When to go",
+    "gettingThere": "Getting there",
+    "others": "Other destinations",
+    "noExperiences": "We're preparing the first experiences in this country."
   }
 }
